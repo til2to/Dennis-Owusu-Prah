@@ -1,0 +1,407 @@
+{
+    "category": {
+        "products": [
+            {
+                "prices": [
+                    {
+                        "amount": 144.69,
+                        "currency": {
+                            "label": "USD",
+                            "symbol": "$",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 104,
+                        "currency": {
+                            "label": "GBP",
+                            "symbol": "£",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 186.65,
+                        "currency": {
+                            "label": "AUD",
+                            "symbol": "A$",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 15625.24,
+                        "currency": {
+                            "label": "JPY",
+                            "symbol": "¥",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 10941.76,
+                        "currency": {
+                            "label": "RUB",
+                            "symbol": "₽",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    }
+                ],
+                "__typename": "Product"
+            },
+            {
+                "prices": [
+                    {
+                        "amount": 518.47,
+                        "currency": {
+                            "label": "USD",
+                            "symbol": "$",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 372.67,
+                        "currency": {
+                            "label": "GBP",
+                            "symbol": "£",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 668.83,
+                        "currency": {
+                            "label": "AUD",
+                            "symbol": "A$",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 55990.46,
+                        "currency": {
+                            "label": "JPY",
+                            "symbol": "¥",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 39207.96,
+                        "currency": {
+                            "label": "RUB",
+                            "symbol": "₽",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    }
+                ],
+                "__typename": "Product"
+            },
+            {
+                "prices": [
+                    {
+                        "amount": 844.02,
+                        "currency": {
+                            "label": "USD",
+                            "symbol": "$",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 606.67,
+                        "currency": {
+                            "label": "GBP",
+                            "symbol": "£",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 1088.79,
+                        "currency": {
+                            "label": "AUD",
+                            "symbol": "A$",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 91147.25,
+                        "currency": {
+                            "label": "JPY",
+                            "symbol": "¥",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 63826.91,
+                        "currency": {
+                            "label": "RUB",
+                            "symbol": "₽",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    }
+                ],
+                "__typename": "Product"
+            },
+            {
+                "prices": [
+                    {
+                        "amount": 333.99,
+                        "currency": {
+                            "label": "USD",
+                            "symbol": "$",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 240.07,
+                        "currency": {
+                            "label": "GBP",
+                            "symbol": "£",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 430.85,
+                        "currency": {
+                            "label": "AUD",
+                            "symbol": "A$",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 36068.27,
+                        "currency": {
+                            "label": "JPY",
+                            "symbol": "¥",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 25257.22,
+                        "currency": {
+                            "label": "RUB",
+                            "symbol": "₽",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    }
+                ],
+                "__typename": "Product"
+            },
+            {
+                "prices": [
+                    {
+                        "amount": 1688.03,
+                        "currency": {
+                            "label": "USD",
+                            "symbol": "$",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 1213.34,
+                        "currency": {
+                            "label": "GBP",
+                            "symbol": "£",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 2177.57,
+                        "currency": {
+                            "label": "AUD",
+                            "symbol": "A$",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 182294.51,
+                        "currency": {
+                            "label": "JPY",
+                            "symbol": "¥",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 127653.82,
+                        "currency": {
+                            "label": "RUB",
+                            "symbol": "₽",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    }
+                ],
+                "__typename": "Product"
+            },
+            {
+                "prices": [
+                    {
+                        "amount": 1000.76,
+                        "currency": {
+                            "label": "USD",
+                            "symbol": "$",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 719.34,
+                        "currency": {
+                            "label": "GBP",
+                            "symbol": "£",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 1290.99,
+                        "currency": {
+                            "label": "AUD",
+                            "symbol": "A$",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 108074.6,
+                        "currency": {
+                            "label": "JPY",
+                            "symbol": "¥",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 75680.48,
+                        "currency": {
+                            "label": "RUB",
+                            "symbol": "₽",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    }
+                ],
+                "__typename": "Product"
+            },
+            {
+                "prices": [
+                    {
+                        "amount": 300.23,
+                        "currency": {
+                            "label": "USD",
+                            "symbol": "$",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 215.8,
+                        "currency": {
+                            "label": "GBP",
+                            "symbol": "£",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 387.3,
+                        "currency": {
+                            "label": "AUD",
+                            "symbol": "A$",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 32422.38,
+                        "currency": {
+                            "label": "JPY",
+                            "symbol": "¥",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 22704.14,
+                        "currency": {
+                            "label": "RUB",
+                            "symbol": "₽",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    }
+                ],
+                "__typename": "Product"
+            },
+            {
+                "prices": [
+                    {
+                        "amount": 120.57,
+                        "currency": {
+                            "label": "USD",
+                            "symbol": "$",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 86.67,
+                        "currency": {
+                            "label": "GBP",
+                            "symbol": "£",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 155.54,
+                        "currency": {
+                            "label": "AUD",
+                            "symbol": "A$",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 13021.04,
+                        "currency": {
+                            "label": "JPY",
+                            "symbol": "¥",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    },
+                    {
+                        "amount": 9118.13,
+                        "currency": {
+                            "label": "RUB",
+                            "symbol": "₽",
+                            "__typename": "Currency"
+                        },
+                        "__typename": "Price"
+                    }
+                ],
+                "__typename": "Product"
+            }
+        ],
+        "__typename": "Category"
+    }
+}
