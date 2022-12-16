@@ -1,40 +1,55 @@
 import React, { Component } from 'react'
+import { Query } from 'react-apollo'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
-import Products from '../components/Products';
-import Categories from '../components/Categories';
-import Navbar from '../components/Navbar';
-import { Link, params } from 'react-router-dom';
+import ProductItem from '../components/ProductItem'
+import { ALLPRODUCT_QUERY } from '../Data/GraphqlData'
+import { connect } from 'react-redux';
 
-export class ProductDetail extends Component {
-  static propTypes = {}
 
+class ProductList extends Component {
   render() {
+    let { name } = this.props.match.params
+    const pageSize = 12;
     return (
       <Container>
-        <Navbar />
-        <Products />
+        <CategoryName>
+          Category {name}
+        </CategoryName>
+
+        <Query query={ALLPRODUCT_QUERY} variables={{ title: name }}>
+          {
+            ({ data, loading, error }) => {
+              if (loading) return <h4> Loading.</h4>
+              if (error) console.log(error.message)
+              
+              return <Wrap>
+                {
+                  data.category.products.map(prod => (
+                    <ProductItem key={prod.id} prod={prod} />
+                  ))
+                }
+              </Wrap>
+            }
+          }
+        </Query>
       </Container>
     )
   }
 }
 
-export default ProductDetail
+export default connect((state) => ({ products: state.products }))(ProductList)
 
 const Container = styled.div`
+  padding: 10px;
+  margin-: 0 25px;
 `
-const Button = styled.div`
-  font-weight: 600;
-  color: white;
-  background-color: #5ECE7B;
-  height: 40px;
-  width: 250px;
+const CategoryName = styled.div`
+  font-weight: 250;
+  font-size: 25px;
+  margin: 45px 0 100px 0;
+`
+const Wrap = styled.div`
   display: flex;
-  justify-content: center;
-  border-radius: 3px; 
-  opacity: 0.85;
-  font-size: 13px;
-  cursor: pointer;
-  margin-top: 20px;
-  align-items: center;  
+  flex-wrap: wrap;
+  margin: 50px 0;
 `

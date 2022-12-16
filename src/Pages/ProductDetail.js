@@ -1,170 +1,254 @@
-import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Query } from "react-apollo";
+import styled from "styled-components";
+import Attributes from "../components/Attributes";
+import SideList from "../components/SideList";
+import { PRODUCT_QUERY } from "../Data/GraphqlData";
+import { connect } from "react-redux";
+import { addToCart, getCart } from "../actions/cartActions";
 
+class ProductDetail extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      index: 0,
+      product: {},
+    };
+  }
 
-export class ProductPage extends Component {
-  static propTypes = {}
+  static propTypes = {};
+
+  handleClick = (property, propertyValue) => {
+    this.setState({
+      product: { ...this.state.product, [property]: propertyValue },
+    });
+  };
+
+  submitToCart = async (currentProduct) => {
+    const objectArray = Object.entries(this.state.product); //convert object to array
+    let newAttributes = [];
+    objectArray.forEach(([key, value]) => {
+      newAttributes.push({ name: key, value: value });
+    });
+
+    let copied = JSON.parse(JSON.stringify(currentProduct));
+    copied.attributes = newAttributes;
+
+    let setAttribtes = []
+ 
+    if(copied.attributes.length !== currentProduct.length) {
+      currentProduct.attributes.forEach((property) => {
+        setAttribtes.push({name: property.name, value: property.items[0].value})
+      })
+      let result = setAttribtes.filter(el1 => 
+        !newAttributes.some(el2 => el1.name === el2.name));
+      
+      result.map(el => {
+        newAttributes.push(el)
+      })
+      this.props.addToCart(copied)
+    }
+
+    else {
+      const added = this.props.addToCart(copied)
+      newAttributes = []
+    }
+  };
+
+  handleTab = (index) => {
+    this.setState({ index: index });
+  };
+
+  componentDidMount() {
+    const { index } = this.state;
+  }
 
   render() {
-    const {gallery} = this.props
+    let { id } = this.props.match.params;
+    const { index } = this.state;
 
     return (
       <Container>
-        <Wrapper>
-          <ProductImg>
-            <Image_ src={gallery[0]} alt="" />
-          </ProductImg>
-          <ProductInfo>
-            <Brand>Apollo</Brand>
+        <Query query={PRODUCT_QUERY} variables={{ id: id }}>
+          {({ loading, data, error }) => {
+            if (loading) return <h1>Loading...</h1>;
+            if (error) console.log(error);
 
-            <Name>Running Short</Name>
+            const { prices, gallery, name, brand, description, attributes } = data.product;
+            const currentProduct = data.product;
 
-            <AttributesContainer>
-              <AttributeType>SIZE:</AttributeType>
-              <AttributeItems>
-                <SizeContainer>
-                  <Size>XS</Size>
-                </SizeContainer>
-                <SizeContainer>
-                  <Size>XS</Size>
-                </SizeContainer> 
-                <SizeContainer>
-                  <Size>XS</Size>
-                </SizeContainer> 
-                <SizeContainer>
-                  <Size>XS</Size>
-                </SizeContainer>   
-              </AttributeItems>
-              <AttributeType>COLOR:</AttributeType>
-              <AttributeItems>4,6,9,2</AttributeItems>
-              <Price>
-                <AttributeType>PRICE:</AttributeType>
-                <AttributeType>$50.00</AttributeType>
-              </Price>
-            </AttributesContainer>
+            return (
+              <Wrapper>
+                <SideImgContainer>
+                  <SideWrapper>
+                    <SideList gallery={gallery} tab={this.handleTab} />
+                  </SideWrapper>
+                </SideImgContainer>
+                <ProductImg>
+                  <Image src={gallery[index]} alt="" />
+                </ProductImg>
+                <ProductInfo>
+                  <Brand>{brand}</Brand>
+                  <Name>{name}</Name>
+                  <AttributesContainer>
+                    {data.product.attributes.map((item) => (
+                      <Attributes
+                        key={item.id}
+                        item={item}
+                        selectedAttributes={this.state.product}
+                        handleClick={this.handleClick}                       
+                      />
+                    ))}
+                    <PriceInfo>
+                      <AttributePrice>PRICE: </AttributePrice>
+                      <AttributePrice>
+                        {
+                          prices[
+                            parseInt(
+                              window.localStorage.getItem("SelectedCurrency")
+                            )
+                          ].currency.symbol
+                        }
+                        {" "}
+                        {prices[parseInt(
+                            window.localStorage.getItem("SelectedCurrency")
+                          )].amount
+                        }
 
-            <Button>ADD TO CART</Button>
-
-            <ProductDescription>
-              <br /><p>A good gaming console. Plays games of PS4! Enjoy if you can buy it mwahahahaha</p>
-            </ProductDescription>
-
-          </ProductInfo>
-        </Wrapper>
+                      </AttributePrice>
+                    </PriceInfo>
+                  </AttributesContainer>
+                  {attributes !== "" ? (
+                    <Button 
+                    onClick={() => this.submitToCart({ ...currentProduct, count:1 })}>
+                      ADD TO CART
+                    </Button>
+                  ) : (
+                    <Empty>
+                      {/* Sorry! no attributes to select. Product already added to
+                      cart */}
+                      {console.log('attributes empty')}
+                    </Empty>
+                  )}
+                  <ProductDescription>
+                    <div dangerouslySetInnerHTML={{ __html: description }} />
+                  </ProductDescription>
+                </ProductInfo>
+              </Wrapper>
+            );
+          }}
+        </Query>
       </Container>
-    )
+    );
   }
 }
 
-export default ProductPage
+export default connect(null, { addToCart, getCart })(ProductDetail);
 
 const Container = styled.div`
-  
-`
+  justify-content: center;
+  padding: 10px;
+  margin: 0 25px 0 25px;
+`;
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-
-`
+  align-items: center;
+`;
 const ProductImg = styled.div`
-  margin-right: 25px;
-  // margin-top: -10px;
+  display: flex;
   box-sizing: border-box;
-  flex: 1
-   `
-const Image_ = styled.img`
-  max-height: 50%;
-  margin-left: -20px;
-  border: 0.5px ;
-  
-   `
+  flex: 1;
+  margin-left: 20px;
+  margin-top: 15px;
+  justify-content: center;
+  max-width: 480px;
+`;
+const Image = styled.img`
+  display: flex;
+  border: 0.5px;
+  widht: 400px;
+  height: 450px;
+`;
 const ProductInfo = styled.div`
-  // margin-left: 30px;
-  margin-top: 120px;
   display: flex;
   flex-direction: column;
-  // justify-content: center;
-  // flex:1;
-  margin-right: 100px;
-`
+  justify-content: center;
+  margin: 5% 0 0 40px;
+`;
 const Brand = styled.span`
   font-weight: 400;
-  font-size: 30px;
+  font-size: 25px;
   line-height: 27px;
   margin-top: 15px;
   margin-bottom: 15px;
-`
+`;
 const Name = styled.span`
   line-height: 27px;
   width: 192;
   display: flex;
   align-items: center;
   font-weight: 250;
-  font-size: 30px;
+  font-size: 25px;
   font-style: normal;
-  color: #1D1F22;
-`
+  color: #1d1f22;
+`;
 const AttributesContainer = styled.div`
-  margin-top:20px;
-`
-const AttributeType = styled.span`
+  margin-top: 15px;
+`;
+const AttributePrice = styled.span`
   font-weight: 700;
   margin-bottom: 10px;
-  
-`
-const AttributeItems = styled.div`
-  margin-top: 10px;
-  margin-bottom: 25px;
-  display: flex;
-  
-`
-const Price = styled.span`
+`;
+const PriceInfo = styled.span`
   display: flex;
   flex-direction: column;
-  
-`
+`;
 const Button = styled.div`
   font-weight: 600;
   color: white;
-  background-color: #5ECE7B;
+  background-color: #5ece7b;
   height: 40px;
   width: 250px;
   display: flex;
   justify-content: center;
-  border-radius: 3px; 
+  border-radius: 3px;
   opacity: 0.85;
   font-size: 13px;
   cursor: pointer;
-  margin-top: 20px;
-  align-items: center;  
-`
+  margin-top: 5px;
+  margin-bottom: 10px;
+  align-items: center;
+`;
 const ProductDescription = styled.div`
+  font-family: 'Roboto', sans-serif;
   width: 256px;
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   font-size: 16px;
-`
-const SizeContainer = styled.div`
-  max-width: 63px;
-  max-height: 45px; 
-  border: 1px solid #A6A6A6;
+  margin-top: 5px;
+`;
+const SideImgContainer = styled.div`
+  margin-left: 20px;
+  margin-top: 100px;
+`;
+const SideWrapper = styled.div`
+  margin-left: 20px;
   display: flex;
-  justify-content: center;
-  padding: 8px;
-  box-sizing: border-box;
-  margin: 6px;
-  margin-left: 0;
-`
-const Size = styled.div`
-  font-size: 13px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-`
-const ColorContainer = styled.div`
-
-`
-const Color = styled.div`
-
-`
+  justify-content: flex-end;
+  flex-direction: column;
+`;
+const SideImageC = styled.img`
+  max-width: 130px;
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 5px;
+  cursor: pointer;
+`;
+const Empty = styled.span`
+  color: red;
+  font-size: 18px;
+  font-weight: 500px;
+  flex-wrap: wrap;
+`;

@@ -58,12 +58,13 @@ export default connect((state) => ({ cartItems: state.cart }),
   null)(MyBag)
 
 const Container = styled.div`
-    padding: 7px;
-    height: 100%;
-    overflow-y: scroll;
-    max-width: 410px;
-    background-color: white;
-    max-height: 550px;
+  padding: 7px;
+  height: 100%;
+  overflow-y: scroll;
+  max-width: 410px;
+  background-color: white;
+  max-height: 550px;
+  overflow-x: hidden;
 `
 const Wrapper = styled.div`
   margin: 0 10px;

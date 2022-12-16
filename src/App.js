@@ -9,11 +9,10 @@ import {
   Link,
   Redirect,
 } from "react-router-dom";
-import { ProductList } from "./Pages/ProductList";
 import Navbar from "./components/Navbar";
-import Products from "./components/Products";
-import Product from "./components/Product";
-import Cart from "./components/Cart";
+import Products from "./Pages/ProductList";
+import Product from "./Pages/ProductDetail";
+import Cart from "./Pages/Cart";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import styled from "styled-components";
