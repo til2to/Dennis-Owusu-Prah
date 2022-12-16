@@ -52,6 +52,7 @@ class Product extends Component {
 
     else {
       const added = this.props.addToCart(copied)
+      newAttributes = []
     }
   };
 
@@ -76,7 +77,6 @@ class Product extends Component {
 
             const { prices, gallery, name, brand, description, attributes } = data.product;
             const currentProduct = data.product;
-            console.log(currentProduct)
 
             return (
               <Wrapper>
@@ -149,8 +149,7 @@ export default connect(null, { addToCart, getCart })(Product);
 const Container = styled.div`
   justify-content: center;
   padding: 10px;
-  margin-left: 25px;
-  margin-right: 25px;
+  margin: 0 25px 0 25px;
 `;
 const Wrapper = styled.div`
   display: flex;
@@ -168,17 +167,15 @@ const ProductImg = styled.div`
 `;
 const Image = styled.img`
   display: flex;
-  max-height: 50%;
   border: 0.5px;
   widht: 400px;
-  height: 500px;
+  height: 450px;
 `;
 const ProductInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-right: 30px;
-  margin-left: 40px;
+  margin: 5% 0 0 40px;
 `;
 const Brand = styled.span`
   font-weight: 400;

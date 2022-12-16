@@ -13,18 +13,18 @@ class Overlay extends Component {
     super(props);
     this.state={
       visible: true,
-    }
+    } 
   }
 
   render() {
-    // const { hideOverlay } = this.props
+    const { hideOverlay } = this.props
 
     return (
       <>
         {this.state.visible && 
-          <Wrapper onClick = {this.props.hideOverlay}>
+          <Wrapper onClick={hideOverlay}>
             <BagStyle onClick={(e)=> e.stopPropagation()}>
-              <MyBag />
+              <MyBag hideOverlay={hideOverlay} />
             </BagStyle>
           </Wrapper>
         }
@@ -52,6 +52,6 @@ const Wrapper = styled.div`
 const BagStyle = styled.div`
   max-width: 450px;
   overflow-y: scroll;
-  z-index: 2147483647;
+  z-index: 2;
   margin-right: 20px;
 `

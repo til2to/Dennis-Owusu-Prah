@@ -40,12 +40,13 @@ class Categories extends Component {
               {
                 categoryArr.map((category, index) => 
                   <>
-                    <Link to={`/products/${category}`} style={{textDecoration: "none", display: "flex"}}>
+                    <StyledLink to={`/products/${category}`}>
                       <Wrapper key={index} indexVal={index} stateVal={activeIndex} 
-                      onClick={() => this.handleActive(index)}> 
+                      onClick={() => this.handleActive(index)}
+                      > 
                         {category.toUpperCase()} 
                       </Wrapper>
-                    </Link>
+                    </StyledLink>
                   </>
                 )
               }
@@ -72,4 +73,8 @@ const Wrapper = styled.span`
   border-bottom: ${props => props.indexVal == props.stateVal ? 
     '1px solid #5ece7b' : {}
   } 
+`
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  display: flex;
 `

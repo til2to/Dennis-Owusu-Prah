@@ -17,7 +17,10 @@ class Cart extends Component {
   render() {
     let { cartItems: { cart, quantity, total } } = this.props;
     let cartTotal = JSON.parse(window.localStorage.getItem('total'))
-    const { selectedCurrency } = this.state
+    const { selectedCurrency } = this.state;
+
+    let tax = 0.21 * cartTotal
+    console.log(tax)
     
     return (
       <Container>
@@ -35,10 +38,10 @@ class Cart extends Component {
             ) )
           }
           <TaxInfo>
-            <Items style={{ marginTop: '20px' }}>Tax:</Items>
+            <Items style={{ marginTop: '20px' }}>Tax: {cart[0] && cart[0].prices[selectedCurrency].currency.symbol } {tax.toFixed(2)}</Items>
             <Items>Quantity: {quantity}</Items>
             {cart[0] && <Items>
-              total: { cart[0].prices[selectedCurrency].currency.symbol } {parseFloat(cartTotal).toFixed(2)} 
+              Total: { cart[0].prices[selectedCurrency].currency.symbol } {parseFloat(cartTotal).toFixed(2)} 
             </Items>}
           </TaxInfo>
           <Button> ORDER </Button>
@@ -55,12 +58,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
-  margin-left: 22px;
-  margin-right: 10px;
+  margin:0 10px 0 22px;
 `
 const Wrapper = styled.div`
-  margin-left: 20px;
-  margin-top: 30px;
+  margin: 30px 0 0 20px;
 `
 const Title = styled.div`
   font-size: 25px;
@@ -79,8 +80,7 @@ const Button = styled.div`
   opacity: 0.85;
   font-size: 13px;
   cursor: pointer;
-  margin-top: 15px;
-  margin-bottom: 10px;
+  margin: 15px 0;
   align-items: center;  
 `
 const TaxInfo = styled.div`

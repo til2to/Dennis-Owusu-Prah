@@ -20,20 +20,50 @@ export const cartReducer = (state = initialState, action) => {
 
       let exist = false
       state.cart?.forEach(item => {
-        if (isEqual(currentProduct, item)) {
-          exist = true   
+        const isEqual = (itemArray, currentArray) => {
+          return (
+            itemArray.length === currentArray.length &&
+            itemArray.every((element_1) =>
+              currentArray.some((element_2) =>
+              Object.keys(element_1).every((key) => 
+              element_1[key] === element_2[key]))
+            )
+          );
+        };
+        
+        if(isEqual(item.attributes, currentProduct.attributes)){
+          exist = true;
           console.log('item exist')
           
-          return {
-            ...state,
-            cart: [...state.cart] 
-          }
+          let updateLocalcount = JSON.parse(window.localStorage.getItem('data'))
+
+          updateLocalcount.forEach((localProduct) => {  
+            if(checkLocalStorage(currentProduct.attributes, localProduct.attributes))
+            {
+              console.log('true')
+              localProduct.count = localProduct.count + 1
+              window.localStorage.setItem('data', JSON.stringify(updateLocalcount))
+            }
+          })
+
+          function checkLocalStorage (localStorage, currentArray) {
+            return (
+              localStorage.length === currentArray.length &&
+              localStorage.every((element_1) =>
+                currentArray.some((element_2) =>
+                Object.keys(element_1).every((key) => 
+                element_1[key] === element_2[key]))
+              )
+            );
+          };
         }
+
+        // return {
+        //   ...state,
+        //   cart: [...state.cart] 
+        // }
       })
       
-      function isEqual(currentProduct, item) {
-        return JSON.stringify(currentProduct) === JSON.stringify(item);
-      }
 
       // item not in cart
       if (exist == false) {
@@ -46,13 +76,14 @@ export const cartReducer = (state = initialState, action) => {
         let arr = window.localStorage.setItem('data', JSON.stringify([...state.cart, currentProduct]))
         state.total += currentProduct.prices[amountIndex].amount 
         let localTotal = window.localStorage.setItem('total', JSON.stringify(state.total))
-
+        
         return {
           ...state,
           cart: [...state.cart, currentProduct]      
         }
       }
       
+
     case ADD_COUNT: 
       let attributes = action.payload
       let cartProducts = state.cart
@@ -62,23 +93,27 @@ export const cartReducer = (state = initialState, action) => {
           product.count = product.count + 1
 
           let updateLocalcount = JSON.parse(window.localStorage.getItem('data'))
-          // let selectedCurrency: JSON.parse(window.localStorage.getItem("SelectedCurrency"));
           
           let amountIndex = JSON.parse(window.localStorage.getItem('SelectedCurrency'))
           
-          product.count >= 1 && (state.total += product.prices[amountIndex].amount)
+          product.count >= 1 && (state.total += 
+            product.prices[amountIndex].amount)
           parseFloat(state.total)
 
           let localTotal = JSON.parse(window.localStorage.getItem('total'))
           localTotal+=product.prices[amountIndex].amount
           window.localStorage.setItem('total', JSON.stringify(localTotal))       
 
-          updateLocalcount.forEach((localCount) => {
-            if(attributes === localCount.attributes){
-              localCount.count = parseInt(product.count)
+          updateLocalcount.forEach((localProduct) => {  
+            if(isSame(product.attributes, localProduct.attributes)){
+              localProduct.count = product.count
               window.localStorage.setItem('data', JSON.stringify(updateLocalcount))
             }
           })
+
+          function isSame(product, localProduct) {
+            return JSON.stringify(product) === JSON.stringify(localProduct);
+          }
         }
       })
 
@@ -113,12 +148,16 @@ export const cartReducer = (state = initialState, action) => {
 
           console.log(parseFloat(localTotal).toFixed(2))  
 
-          updateLocalsub.forEach((localCount) => {
-            if(currentAttributes === localCount.attributes){
-              localCount.count = parseInt(product.count)
-              localStorage.setItem('data', JSON.stringify(updateLocalsub))
+          updateLocalsub.forEach((localProduct) => {
+            if(isSame(product.attributes, localProduct.attributes)){
+              localProduct.count = product.count
+              window.localStorage.setItem('data', JSON.stringify(updateLocalsub))
             }
           })
+
+          function isSame(product, localProduct) {
+            return JSON.stringify(product) === JSON.stringify(localProduct);
+          }
         }
       })
 

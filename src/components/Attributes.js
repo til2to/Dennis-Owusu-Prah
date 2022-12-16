@@ -8,7 +8,6 @@ class Attributes extends Component {
 
   render() {
     const { item: { name, type, items }, handleClick, selectedAttributes } = this.props
-    console.log(name)
 
     return (
       <Container>

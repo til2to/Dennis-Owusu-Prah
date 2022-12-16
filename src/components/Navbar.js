@@ -1,22 +1,20 @@
 import React, { Component } from "react";
-import ReactDOM from 'react-dom';
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import logo from "../images/logo.png";
-import down_arrow from "../images/down_arrow.png";
-import dollar from "../images/dollar.png";
 import basket_ from "../images/basket_.png";
 import logoH from "../images/logoH.png";
 import Categories from "./Categories";
 import { connect } from "react-redux";
 import Overlay from "./Overlay";
+import CurrencySelector from "./CurrencySelector";
 
 class Navbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       toggleOverlay: false,
-      currency: window.localStorage.getItem("Currency") || []
+      currency: window.localStorage.getItem("Currency") || [],
     };
   }
   static propTypes = {};
@@ -35,12 +33,11 @@ class Navbar extends Component {
 
   currencySwitcher = (index) => {
     window.localStorage.setItem("SelectCurrency", JSON.stringify(index))
-    console.log(index)
   }
 
   render() {
     const { cartItems: { cart, quantity } } = this.props;
-    const { toggleOverlay, currency } = this.state;
+    const { toggleOverlay } = this.state;
 
     return (
       <Container>
@@ -55,65 +52,17 @@ class Navbar extends Component {
           <NavRight>
             <CurrencyItems>
               <ArrowContainer>
-                <Symbol_Label>
-                  {/* <Select
-                    name=""
-                    onChange={
-                      (e) => (window.localStorage.setItem("SelectedCurrency", e.target.value))
-                      }
-                    >
-                    {
-                      (currency && 
-                        JSON.parse(currency).map((data, index) => (
-                          <option
-                            key={index}
-                            value={index}
-                            selected={ JSON.parse(window.localStorage.getItem("SelectedCurrency"))?.toString() 
-                            === index.toString()} >
-                              
-                            {data?.currency?.symbol + " " + data?.currency?.label}
-                          </option>
-                        ))
-                      )
-                    }
-                  </Select> */}
-
-                  <ul>
-                    {(currency && 
-                      JSON.parse(currency).map((data, index) => (
-                        <li
-                          onChange={
-                            (e) => (window.localStorage.setItem("SelectedCurrency", e.target.value))
-                          }
-                          
-                          onClick={() => this.currencySwitcher(index)}
-                          key={index}
-                          
-                          selected={ JSON.parse(window.localStorage.getItem("SelectedCurrency"))?.toString() 
-                          === index.toString()} 
-                          >
-                          
-                          
-                          <div>
-                            {data?.currency?.symbol + " " + data?.currency?.label}
-                          </div>
-                        </li>
-                      ))
-                    )}
-                    
-                  </ul>
-                </Symbol_Label>
+                <CurrencySelector />
               </ArrowContainer>
 
-              <MyBag_Bag onClick={() => this.showOverlay()} >
+              <MyBag_Bag onClick={()=>this.showOverlay()} >
                 <Bag>
                   <TotalItems>{quantity}</TotalItems>
                   <img src={basket_} alt="" />
                 </Bag>
               </MyBag_Bag>
-              
               {toggleOverlay && 
-              <Overlay hideOverlay={ this.hideOverlay }/>}
+              <Overlay  hideOverlay={this.hideOverlay} />}
             </CurrencyItems>
           </NavRight>
         </Wrapper>
@@ -133,7 +82,7 @@ const Wrapper = styled.div`
   justify-content: center;
   position: fixed;
   z-index: 1;
-  width: 100%;
+  width: 95%;
 `;
 const NavLeft = styled.div`
   flex: 1;
@@ -211,45 +160,6 @@ const TotalItems = styled.div`
 const MyBag_Bag = styled.div``;
 
 const Symbol_Label = styled.div`
-  // position: absolute;
-  left: 82%;
-  select {
-    outline: 0;
-  }
-  ul {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
-  ul li {
-    list-style-type: none;
-    margin-left: 10px;
-    padding-left: 10px;
-    border: none;
-    text-align: center;
-    line-height: normal;
-  }
-
-  ul li div {
-    // background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    width: 150px;
-    height: 40px;
-    border: none;
-    padding-top: 5px;
-    background-color: yellow;
-  }
-
-  ul li div:hover {
-    background: #eee;
-  }
-  // ul li {
-  //   list-style-type: none;
-  // }
-  // ul li { padding: 5px 10px; z-index: 2; }
-  // ul li:not(.init) { float: left; width: 130px; display: none; background: #ddd; }
-  // ul li:not(.init):hover, ul li.selected:not(.init) { background: #09f; }
-  // li.init { cursor: pointer; }
 `;
 
 const ArrowContainer = styled.div``;

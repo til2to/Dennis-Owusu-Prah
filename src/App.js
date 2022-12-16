@@ -19,6 +19,7 @@ import { Provider } from "react-redux";
 import styled from "styled-components";
 import { PRICE_QUERY } from "./Data/GraphqlData";
 import { Query } from "react-apollo";
+import CurrencySelector from './components/CurrencySelector';
 
 
 class App extends Component {
@@ -83,6 +84,5 @@ export default App;
 
 const Container = styled.div`
   padding: 10px;
-  margin-left: 25px;
-  margin-right: 15px;
+  margin: 0 15 0 25px;
 `;

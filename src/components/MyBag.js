@@ -15,7 +15,7 @@ class MyBag extends Component {
   static propTypes = {}
 
   render() {
-    const { cartItems: {cart, quantity, total}, overlayToggle } = this.props;
+    const { cartItems: {cart, quantity, total}, overlayToggle, hideOverlay } = this.props;
     let cartTotal = window.localStorage.getItem('total')
     const { selectedCurrency } = this.state
 
@@ -41,12 +41,12 @@ class MyBag extends Component {
           </Total>
 
           <ButtonsContainer>
-            <Link to='/cart' style={{ textDecoration: 'none' }}>
-              <Button onClick={ overlayToggle }> VIEW BAG </Button>
-            </Link>
-            <Link to='#' style={{ textDecoration: 'none' }}>
-              <ButtonCheckout> CHECKOUT </ButtonCheckout>
-            </Link>
+            <StyledLink to='/cart'>
+              <Button onClick={hideOverlay}> VIEW BAG </Button>
+            </StyledLink>
+            <StyledLink to='#'>
+              <ButtonCheckout onClick={hideOverlay}> CHECKOUT </ButtonCheckout>
+            </StyledLink>
           </ButtonsContainer>
         </Wrapper>
       </Container>
@@ -67,6 +67,9 @@ const Container = styled.div`
 `
 const Wrapper = styled.div`
   margin: 0 10px;
+`
+const StyledLink = styled(Link)`
+  text-decoration: none;
 `
 const Title = styled.div`
   margin-top: 15px;

@@ -33,6 +33,20 @@ class CartItem extends Component {
 
   render() {
     let { name, brand, gallery, attributes, prices, count } = this.props.item
+    let updateLocalcount = JSON.parse(window.localStorage.getItem('data'))
+
+    let currentCount;
+    updateLocalcount.forEach((localProduct) => {
+      if (isSame(attributes, localProduct.attributes)) {
+        console.log('equal')
+        currentCount = localProduct.count
+      }
+    })
+
+    function isSame (localProduct, currentProdut) {
+      return JSON.stringify(localProduct) === JSON.stringify(currentProdut)
+    }
+    // let count = 
     const { noArrows, counter, cartItems } = this.props
     const { imageIndex } = this.state
 
@@ -75,7 +89,7 @@ class CartItem extends Component {
             </IncreaseIcon>
           </AddCount>
 
-          <Count>{count}</Count>
+          <Count>{currentCount}</Count>
           
           <SubCount onClick={() => this.props.subCount(attributes)}>
             <img src={decIcon} alt="" />

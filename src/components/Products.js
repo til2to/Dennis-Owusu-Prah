@@ -46,15 +46,12 @@ export default connect((state) => ({ products: state.products }),
 
 const Container = styled.div`
   padding: 10px;
-  margin-left: 25px;
-  margin-right: 25px;
+  margin-: 0 25px;
 `
 const CategoryName = styled.div`
   font-weight: 250;
   font-size: 25px;
-  margin-top: 45px;
-  margin-bottom: 100px;
-  margin-left: 20px;
+  margin: 45px 0 100px 0;
 `
 const Wrap = styled.div`
   display: flex;

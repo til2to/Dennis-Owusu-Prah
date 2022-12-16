@@ -42,19 +42,5 @@ const SideImage = styled.img`
   display: flex;
   flex-direction: column;
   margin-bottom: 5px;
-  
   cursor: pointer;
-
-  &:hover,
-  $.active {
-    background-color: rgba(84, 78, 114, 1);
-    border-radius: 10px 0px 0px 10px;
-  }
-  &.active {
-    color: #f8dc2f;
-  }
-  // &:hover{
-  //   opacity: 0.5;
-  //   border: 1px solid lightblue;
-  // }
 `
