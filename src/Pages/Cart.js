@@ -20,7 +20,23 @@ class Cart extends Component {
     const { selectedCurrency } = this.state;
 
     let tax = 0.21 * cartTotal
-    console.log(tax)
+
+    fetch("https://v6.exchangerate-api.com/v6/xxxxxxxxxxxxxxxxxxxxxx/latest/")
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("NETWORK RESPONSE ERROR");
+      }
+    })
+    .then((data) => {
+      console.log(data);
+      // displayCurrency(data, primary, secondary, amount);
+    })
+    .catch((error) => console.error("FETCH ERROR:", error));
+
+
+    let url = 'https://v6.exchangerate-api.com/v6/e0ce9e26ca60ebc387ee70dc/latest/USD'
     
     return (
       <Container>

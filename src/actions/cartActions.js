@@ -1,4 +1,4 @@
-import { ADD_TO_CART, ADD_COUNT, SUB_COUNT, CART_DATA } from '../Types';
+import { ADD_TO_CART, ADD_COUNT, SUB_COUNT, CART_DATA, CHANGE_TOTAL } from '../Types';
 
 
 export const addToCart = (currentProduct) => ({
@@ -19,3 +19,7 @@ export const subCount = (payload) => ({
 export const getCart = () => ({
   type: CART_DATA
 });
+
+export const changeTotal = () => ({
+  type: CHANGE_TOTAL
+})

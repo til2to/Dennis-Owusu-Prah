@@ -47,6 +47,7 @@ class CurrencySelector extends Component {
     let currentCurrency = JSON.parse(window.localStorage.getItem('SelectedCurrency'))
     this.setState({defaultCurrency: currentCurrency})
     this.setState({open: false})
+    
   }
 
   render() {

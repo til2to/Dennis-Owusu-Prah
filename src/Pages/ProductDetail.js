@@ -53,6 +53,7 @@ class ProductDetail extends Component {
     else {
       const added = this.props.addToCart(copied)
       newAttributes = []
+      window.location.reload()
     }
   };
 
