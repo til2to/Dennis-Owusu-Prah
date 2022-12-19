@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import { Query } from 'react-apollo'
-import { CATEGORIES_QUERY } from '../Data/GraphqlData'
-import { NavLink as BaseNavLink} from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { CATEGORIES_QUERY } from '../../Data/GraphqlData'
+
+import {
+  Wrap,
+  StyledLink,
+  Wrapper,
+} from './CategoriesElements'
 
 
 class Categories extends Component {
@@ -59,22 +62,3 @@ class Categories extends Component {
 }
 
 export default Categories
-
-const Container = styled.div`
-`
-const Wrap = styled.div`
- display: flex;  
-`
-const Wrapper = styled.span`
-  padding: 10px;
-  max-width: 150px;
-  color: #000;
-  padding-bottom: 20px;
-  border-bottom: ${props => props.indexVal == props.stateVal ? 
-    '1px solid #5ece7b' : {}
-  } 
-`
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  display: flex;
-`

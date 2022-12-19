@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
+
+import {
+  Container,
+  Wrapper,
+  SideImage,
+} from './SideListElements'
+
 
 export class SideList extends Component {
   static propTypes = {}
@@ -27,20 +33,3 @@ export class SideList extends Component {
 }
 
 export default SideList
-
-const Container = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`
-const Wrapper = styled.div`
-  margin-left: 20px;
-`
-const SideImage = styled.img`
-  width: 130px;
-  height: 90px; 
-  object-fit: contain;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 5px;
-  cursor: pointer;
-`

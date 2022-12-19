@@ -1,12 +1,30 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Query } from "react-apollo";
-import styled from "styled-components";
-import Attributes from "../components/Attributes";
-import SideList from "../components/SideList";
-import { PRODUCT_QUERY } from "../Data/GraphqlData";
+import Attributes from "../../components/Attributes/Attributes";
+import SideList from "../../components/SideList/SideList";
+import { PRODUCT_QUERY } from "../../Data/GraphqlData";
 import { connect } from "react-redux";
-import { addToCart, getCart } from "../actions/cartActions";
+import { addToCart, } from "../../actions/cartActions";
+
+import {
+  Container,
+  Wrapper,
+  Name,
+  Brand,
+  Button,
+  Empty,
+  PriceInfo,
+  AttributePrice,
+  Image,
+  ProductInfo,
+  SideWrapper,
+  SideImgContainer,
+  ProductImg,
+  AttributesContainer,
+  ProductDescription
+} from './ProductDetailElements'
+
 
 class ProductDetail extends Component {
   constructor(props) {
@@ -144,111 +162,5 @@ class ProductDetail extends Component {
   }
 }
 
-export default connect(null, { addToCart, getCart })(ProductDetail);
+export default connect(null, { addToCart })(ProductDetail);
 
-const Container = styled.div`
-  justify-content: center;
-  padding: 10px;
-  margin: 0 25px 0 25px;
-`;
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const ProductImg = styled.div`
-  display: flex;
-  box-sizing: border-box;
-  flex: 1;
-  margin-left: 20px;
-  margin-top: 15px;
-  justify-content: center;
-  max-width: 480px;
-`;
-const Image = styled.img`
-  display: flex;
-  border: 0.5px;
-  widht: 400px;
-  height: 450px;
-`;
-const ProductInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 5% 0 0 40px;
-`;
-const Brand = styled.span`
-  font-weight: 400;
-  font-size: 25px;
-  line-height: 27px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-`;
-const Name = styled.span`
-  line-height: 27px;
-  width: 192;
-  display: flex;
-  align-items: center;
-  font-weight: 250;
-  font-size: 25px;
-  font-style: normal;
-  color: #1d1f22;
-`;
-const AttributesContainer = styled.div`
-  margin-top: 15px;
-`;
-const AttributePrice = styled.span`
-  font-weight: 700;
-  margin-bottom: 10px;
-`;
-const PriceInfo = styled.span`
-  display: flex;
-  flex-direction: column;
-`;
-const Button = styled.div`
-  font-weight: 600;
-  color: white;
-  background-color: #5ece7b;
-  height: 40px;
-  width: 250px;
-  display: flex;
-  justify-content: center;
-  border-radius: 3px;
-  opacity: 0.85;
-  font-size: 13px;
-  cursor: pointer;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  align-items: center;
-`;
-const ProductDescription = styled.div`
-  font-family: 'Roboto', sans-serif;
-  width: 256px;
-  display: flex;
-  flex-wrap: wrap;
-  font-size: 16px;
-  margin-top: 5px;
-`;
-const SideImgContainer = styled.div`
-  margin-left: 20px;
-  margin-top: 100px;
-`;
-const SideWrapper = styled.div`
-  margin-left: 20px;
-  display: flex;
-  justify-content: flex-end;
-  flex-direction: column;
-`;
-const SideImageC = styled.img`
-  max-width: 130px;
-  height: 90px;
-  object-fit: contain;
-  margin-bottom: 5px;
-  cursor: pointer;
-`;
-const Empty = styled.span`
-  color: red;
-  font-size: 18px;
-  font-weight: 500px;
-  flex-wrap: wrap;
-`;

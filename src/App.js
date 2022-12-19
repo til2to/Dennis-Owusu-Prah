@@ -6,19 +6,17 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect,
 } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Products from "./Pages/ProductList";
-import Product from "./Pages/ProductDetail";
-import Cart from "./Pages/Cart";
+import Navbar from "./components/Navbar/Navbar";
+import Products from "./Pages/ProductList/ProductList";
+import Product from "./Pages/ProductDetail/ProductDetail";
+import Cart from "./Pages/Cart/Cart";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import styled from "styled-components";
 import { PRICE_QUERY } from "./Data/GraphqlData";
 import { Query } from "react-apollo";
-import CurrencySelector from './components/CurrencySelector';
 
 
 class App extends Component {

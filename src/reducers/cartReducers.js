@@ -1,8 +1,8 @@
-import { ADD_TO_CART, ADD_COUNT, SUB_COUNT, CART_DATA } from '../Types';
+import { ADD_TO_CART, ADD_COUNT, SUB_COUNT, CONVERT_TOTAL } from '../Types';
 
 
 const currentCart = JSON.parse(window.localStorage.getItem('data')) || [];
-const currentTotal = JSON.parse(window.localStorage.getItem('total'))
+let currentTotal = JSON.parse(window.localStorage.getItem('total'))
 
 const initialState = {
   cart: currentCart,
@@ -13,7 +13,11 @@ const initialState = {
 export const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
+
       const currentProduct = action.payload
+      const setCurrentProduct = () => {
+        state.current.push(currentProduct)
+      }
 
       let amountIndex = parseInt(window.localStorage.getItem('SelectedCurrency'))
       let currentAmount = currentProduct.prices[amountIndex].amount * currentProduct.count
@@ -83,6 +87,19 @@ export const cartReducer = (state = initialState, action) => {
         }
       }
       
+    case CONVERT_TOTAL:
+      // let localTotal = window.localStorage.setItem('total', 0)
+
+      // let amtIndex = parseInt(window.localStorage.getItem('SelectedCurrency'))
+      // let currentAmt = currentProduct.prices[amtIndex].amount * currentProduct.count
+
+      // state.total += currentProduct.prices[amtIndex].amount 
+      // localTotal = window.localStorage.setItem('total', JSON.stringify(state.total))
+
+      // return {
+      //   ...state,
+      //   cart: [...state.cart]
+      // }
 
     case ADD_COUNT: 
       let attributes = action.payload

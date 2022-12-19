@@ -1,7 +1,18 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import arrow from "../images/arrow.svg";
+import arrow from "../../images/arrow.svg";
+import { connect } from "react-redux";
+import { convertTotal } from "../../actions/cartActions";
+
+import {
+  Wrap,
+  CurrencySymbol,
+  ArrowContainer,
+  Arrow,
+  Drop,
+  Dropdown,
+} from './CurrencySelectorElements'
 
 
 class CurrencySelector extends Component {
@@ -11,6 +22,7 @@ class CurrencySelector extends Component {
     this.state = {
       defaultCurrency: JSON.parse(window.localStorage.getItem('SelectedCurrency')),
       open: false, 
+      currencyChange: false,
     }
   }
 
@@ -47,6 +59,13 @@ class CurrencySelector extends Component {
     let currentCurrency = JSON.parse(window.localStorage.getItem('SelectedCurrency'))
     this.setState({defaultCurrency: currentCurrency})
     this.setState({open: false})
+    
+    this.setState({currencyChange: true})
+    
+
+    // this.state.currencyChange && 
+    // window.localStorage.setItem('CurrencyChange', JSON.stringify('hiii'))
+    // this.setState({currencyChange: false})
   }
 
   render() {
@@ -79,45 +98,4 @@ class CurrencySelector extends Component {
   }
 }
 
-export default CurrencySelector
-
-const Wrap = styled.div`
-  position: relative;
-  display: inline-block;
-  left: 20px;
-`
-const Arrow = styled.img`
-  width: 11px;
-  position: relative;
-  right: 25px;
-  margin-top: 15px;
-  transform: ${props => props.open === true ? 'rotate(180deg)' : {}};
-`
-const Dropdown = styled.div`
-  padding: 10px 14px;
-  width: 114px;
-  font-size: 22px;
-  text-align: center;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.14);
-    cursor: pointer;
-  }
-`
-const Drop = styled.div`
-  position: absolute;
-  top: 100%;
-  right: -2.5em;
-  z-index: 3;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  background-color: white;
-  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
-  `
-  const CurrencySymbol = styled.div`
-  position: absolute;
-  font-size: 22px;
-  right: 50px;
-  width: 100%;
-  padding-right: ${props => props.indexLength > 1 && '10px'}
-`
-const ArrowContainer = styled.div`
-`
+export default connect(null, { convertTotal })(CurrencySelector)
