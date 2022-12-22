@@ -61,11 +61,6 @@ class CurrencySelector extends Component {
     this.setState({open: false})
     
     this.setState({currencyChange: true})
-    
-
-    // this.state.currencyChange && 
-    // window.localStorage.setItem('CurrencyChange', JSON.stringify('hiii'))
-    // this.setState({currencyChange: false})
   }
 
   render() {
