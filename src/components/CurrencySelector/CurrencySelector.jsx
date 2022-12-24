@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import styled from 'styled-components'
 import arrow from "../../images/arrow.svg";
 import { connect } from "react-redux";
 import { convertTotal } from "../../actions/cartActions";
+import { changeCurrency } from "../../actions/currencyActions";
 
 import {
   Wrap,
@@ -18,16 +18,18 @@ import {
 class CurrencySelector extends Component {
   static propTypes = {}
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       defaultCurrency: JSON.parse(window.localStorage.getItem('SelectedCurrency')),
       open: false,
+      currencyChanger: 0,
+      reload: false,
     }
-  }
+  };
 
   container = React.createRef();
 
-  componentDidMount() {
+  componentDidMount() { 
     document.addEventListener("mousedown", this.handleClickOutside);
   }
   componentWillUnmount() {
@@ -60,12 +62,10 @@ class CurrencySelector extends Component {
       defaultCurrency: currentCurrency,
       open: false,
     });
-
+    
     let products = JSON.parse(window.localStorage.getItem('data')) || []
-    console.log(products)
 
     window.localStorage.setItem('total', 0)
-
     let amountIndex = parseInt(window.localStorage.getItem('SelectedCurrency'))
 
     let productAmount, value = [];
@@ -75,15 +75,15 @@ class CurrencySelector extends Component {
     })
     const sum = value.reduce(
       (initialValue, currentValue) => initialValue + currentValue, 0);
-
     window.localStorage.setItem('total', JSON.stringify(sum))
   }
 
   render() {
     const { defaultCurrency, open } = this.state
+    const { currency } = this.props
 
     let currencies = JSON.parse(window.localStorage.getItem("Currency"))
-    const indexLength = currencies[defaultCurrency]?.currency?.symbol.length
+    const indexLength = currencies[defaultCurrency]?.currency?.symbol?.length
 
     return (
       <Wrap>
@@ -109,4 +109,5 @@ class CurrencySelector extends Component {
   }
 }
 
-export default connect(null, { convertTotal })(CurrencySelector)
+export default connect((state)=> ({currency: state.currentCurrency}), 
+{ convertTotal, changeCurrency })(CurrencySelector)

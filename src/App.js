@@ -39,7 +39,7 @@ class App extends Component {
   }
 
   render() {
-    const { currency, visible } = this.state
+    const { currency } = this.state
 
     return (
       <>
