@@ -55,19 +55,8 @@ class CartItem extends Component {
   }
 
   render() {
-    let { name, brand, gallery, attributes, prices, count } = this.props.item
+    let { name, brand, gallery, attributes, prices } = this.props.item
     let updateLocalcount = JSON.parse(window.localStorage.getItem('data'))
-
-    const isEqual = (itemArray, currentArray) => {
-      return (
-        itemArray.length === currentArray.length &&
-        itemArray.every((element_1) =>
-          currentArray.some((element_2) =>
-          Object.keys(element_1).every((key) => 
-          element_1[key] === element_2[key]))
-        )
-      );
-    };
 
     let currentCount;
     updateLocalcount.forEach((localProduct) => {
@@ -76,9 +65,20 @@ class CartItem extends Component {
       }
     })
 
-    // function isSame (localProduct, currentProdut) {
-    //   return JSON.stringify(localProduct) === JSON.stringify(currentProdut)
-    // }
+    // function isEqual (itemArray, currentArray) {
+    //   return (
+    //     itemArray.length === currentArray.length &&
+    //     itemArray.every((element_1) =>
+    //       currentArray.some((element_2) =>
+    //       Object.keys(element_1).every((key) => 
+    //       element_1[key] === element_2[key]))
+    //     )
+    //   );
+    // };
+
+    function isEqual (localProduct, currentProdut) {
+      return JSON.stringify(localProduct) === JSON.stringify(currentProdut)
+    }
      
     const { noArrows } = this.props
     const { imageIndex } = this.state
@@ -156,5 +156,5 @@ class CartItem extends Component {
   }
 }
 
-export default connect((state) => ({ cartItems: state.cart.cart, counter: state.cart.total }),
+export default connect((state) => ({ cartItems: state.cart.cart }),
   { addCount, subCount })(CartItem)

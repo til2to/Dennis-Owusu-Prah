@@ -21,8 +21,7 @@ class CurrencySelector extends Component {
     super(props)
     this.state = {
       defaultCurrency: JSON.parse(window.localStorage.getItem('SelectedCurrency')),
-      open: false, 
-      currencyChange: false,
+      open: false,
     }
   }
 
@@ -47,7 +46,7 @@ class CurrencySelector extends Component {
     if (
       this.container.current &&
       !this.container.current.contains(event.target)
-    ) {
+      ) {
       this.setState({
         open: false,
       });
@@ -57,10 +56,27 @@ class CurrencySelector extends Component {
   setCurrency = async (type) => {
     window.localStorage.setItem('SelectedCurrency', JSON.stringify(type))
     let currentCurrency = JSON.parse(window.localStorage.getItem('SelectedCurrency'))
-    this.setState({defaultCurrency: currentCurrency})
-    this.setState({open: false})
-    
-    this.setState({currencyChange: true})
+    this.setState({
+      defaultCurrency: currentCurrency,
+      open: false,
+    });
+
+    let products = JSON.parse(window.localStorage.getItem('data')) || []
+    console.log(products)
+
+    window.localStorage.setItem('total', 0)
+
+    let amountIndex = parseInt(window.localStorage.getItem('SelectedCurrency'))
+
+    let productAmount, value = [];
+    products.forEach((product, index) => {
+      productAmount = (product.prices[amountIndex].amount * product.count) 
+      value.push(productAmount)
+    })
+    const sum = value.reduce(
+      (initialValue, currentValue) => initialValue + currentValue, 0);
+
+    window.localStorage.setItem('total', JSON.stringify(sum))
   }
 
   render() {

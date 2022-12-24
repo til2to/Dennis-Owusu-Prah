@@ -70,7 +70,7 @@ class ProductDetail extends Component {
 
     else {
       const added = this.props.addToCart(copied)
-      newAttributes = []
+      // newAttributes = []
     }
   };
 
@@ -84,7 +84,7 @@ class ProductDetail extends Component {
 
   render() {
     let { id } = this.props.match.params;
-    const { index } = this.state;
+    const { index, currentCount } = this.state;
 
     return (
       <Container>
@@ -133,7 +133,6 @@ class ProductDetail extends Component {
                             window.localStorage.getItem("SelectedCurrency")
                           )].amount
                         }
-
                       </AttributePrice>
                     </PriceInfo>
                   </AttributesContainer>
@@ -162,5 +161,4 @@ class ProductDetail extends Component {
   }
 }
 
-export default connect(null, { addToCart })(ProductDetail);
-
+export default connect(null,{ addToCart })(ProductDetail)

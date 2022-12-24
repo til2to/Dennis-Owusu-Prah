@@ -26,8 +26,11 @@ class Cart extends Component {
   render() {
     let { cartItems: { cart, quantity, total } } = this.props;
     let cartTotal = JSON.parse(window.localStorage.getItem('total'))
+    let local_data = JSON.parse(window.localStorage.getItem('data'))
     const { selectedCurrency } = this.state;
     let tax = 0.21 * cartTotal
+
+    console.log(local_data)
     
     return (
       <Container>
@@ -40,7 +43,7 @@ class Cart extends Component {
               ?
               (<EmptyCart>Your cart is empty. Please add a product</EmptyCart>)
               :
-              cart.map((item, index) => (
+              local_data.map((item, index) => (
                 <CartItem key={index} item={item} addCount={this.props.addCount} />
             ) )
           }

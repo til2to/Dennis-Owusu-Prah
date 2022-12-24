@@ -1,7 +1,7 @@
 import { ADD_TO_CART, ADD_COUNT, SUB_COUNT, CONVERT_TOTAL } from '../Types';
 
 
-const currentCart = JSON.parse(window.localStorage.getItem('data')) || [];
+let currentCart = JSON.parse(window.localStorage.getItem('data')) || [];
 let currentTotal = JSON.parse(window.localStorage.getItem('total'))
 
 const initialState = {
@@ -18,66 +18,53 @@ export const cartReducer = (state = initialState, action) => {
       let amountIndex = parseInt(window.localStorage.getItem('SelectedCurrency'))
       let currentAmount = currentProduct.prices[amountIndex].amount * currentProduct.count
 
-      let exist = false
-      state.cart?.forEach(item => {
-        const isEqual = (itemArray, currentArray) => {
-          return (
-            itemArray.length === currentArray.length &&
-            itemArray.every((element_1) =>
-              currentArray.some((element_2) =>
-              Object.keys(element_1).every((key) => 
-              element_1[key] === element_2[key]))
-            )
-          );
-        };
-        
-        if(isEqual(item.attributes, currentProduct.attributes)){
+      let exist = false    
+      // check if item exist
+      currentCart.forEach((localProduct) => {  
+        if(checkLocalStorage(currentProduct.attributes, localProduct.attributes))
+        {
           exist = true;
           console.log('item exist')
 
           let local_total = JSON.parse(window.localStorage.getItem('total'))
           local_total += currentProduct.prices[amountIndex].amount;
           window.localStorage.setItem('total', JSON.stringify(local_total))
-          
-          let updateLocalcount = JSON.parse(window.localStorage.getItem('data'))
 
-          updateLocalcount.forEach((localProduct) => {  
-            if(checkLocalStorage(currentProduct.attributes, localProduct.attributes))
-            {
-              console.log('true')
-              localProduct.count = localProduct.count + 1
-              window.localStorage.setItem('data', JSON.stringify(updateLocalcount))
-            }
-          })
-
-          function checkLocalStorage (localStorage, currentArray) {
-            return (
-              localStorage.length === currentArray.length &&
-              localStorage.every((element_1) =>
-                currentArray.some((element_2) =>
-                Object.keys(element_1).every((key) => 
-                element_1[key] === element_2[key]))
-              )
-            );
-          };
+          localProduct.count = localProduct.count + 1
+          window.localStorage.setItem('data', JSON.stringify(currentCart))
         }
       })
+
+      function checkLocalStorage (localStorage, currentProduct_attributes) {
+        return (
+          localStorage.length === currentProduct_attributes.length &&
+          localStorage.every((element_1) =>
+          currentProduct_attributes.some((element_2) =>
+            Object.keys(element_1).every((key) => 
+            element_1[key] === element_2[key]))
+          )
+        );
+      };
       
       // item not in cart
       if (exist == false) {
         state.quantity += 1
         console.log('item does not exist')
-
+        
         let amountIndex = parseInt(window.localStorage.getItem('SelectedCurrency'))
         let currentAmount = currentProduct.prices[amountIndex].amount * currentProduct.count
 
-        let arr = window.localStorage.setItem('data', JSON.stringify([...state.cart, currentProduct]))
-        state.total += currentProduct.prices[amountIndex].amount 
-        let localTotal = window.localStorage.setItem('total', JSON.stringify(state.total))
+        currentCart.push(currentProduct)
+        let arr = window.localStorage.setItem('data', JSON.stringify(currentCart))
+
+        let local_total = JSON.parse(window.localStorage.getItem('total'))
+        
+        local_total += currentProduct.prices[amountIndex].amount 
+        let localTotal = window.localStorage.setItem('total', JSON.stringify(local_total))
         
         return {
           ...state,
-          cart: [...state.cart, currentProduct]      
+          cart: [...currentCart]
         }
       }
 
@@ -93,15 +80,23 @@ export const cartReducer = (state = initialState, action) => {
         if(isSame(attributes, localProduct.attributes)){
           
           localProduct.count = localProduct.count + 1
+          window.localStorage.setItem('data', JSON.stringify(updateLocalcount))
+          
           localProduct.count >= 1 && (localTotal += localProduct.prices[priceIndex].amount)
           window.localStorage.setItem('total', JSON.stringify(localTotal))
-          window.localStorage.setItem('data', JSON.stringify(updateLocalcount))
         }
       })
 
-      function isSame(attributes, localProduct_attributes) {
-        return JSON.stringify(attributes) === JSON.stringify(localProduct_attributes);
-      }
+      function isSame (attributes, localProduct_attributes) {
+        return (
+          attributes.length === localProduct_attributes.length &&
+          attributes.every((element_1) =>
+          localProduct_attributes.some((element_2) =>
+            Object.keys(element_1).every((key) => 
+            element_1[key] === element_2[key]))
+          )
+        );
+      };
 
       return {
         ...state,
@@ -120,17 +115,25 @@ export const cartReducer = (state = initialState, action) => {
         if(isEqual(currentAttributes, localProduct.attributes)){
 
           localProduct.count != 0 && (localProduct.count = localProduct.count - 1)
+          window.localStorage.setItem('data', JSON.stringify(updateLocalsub))
+
           if(localTotal_sub != 0) {
             localTotal_sub -= localProduct.prices[product_price_Index].amount
           }
           window.localStorage.setItem('total', JSON.stringify(localTotal_sub))
-          window.localStorage.setItem('data', JSON.stringify(updateLocalsub))
         }
       })
 
-      function isEqual(currentAttributes, localProduct_attributes) {
-        return JSON.stringify(currentAttributes) === JSON.stringify(localProduct_attributes);
-      }
+      function isEqual (attributes, localProduct_attributes) {
+        return (
+          attributes.length === localProduct_attributes.length &&
+          attributes.every((element_1) =>
+          localProduct_attributes.some((element_2) =>
+            Object.keys(element_1).every((key) => 
+            element_1[key] === element_2[key]))
+          )
+        );
+      };
 
       return {
         ...state,

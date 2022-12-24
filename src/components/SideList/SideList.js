@@ -12,7 +12,6 @@ export class SideList extends Component {
   static propTypes = {}
 
   render() {
-    const { gallery_item } = this.props;
     const {gallery, tab, myRef} = this.props;
   
     return (
