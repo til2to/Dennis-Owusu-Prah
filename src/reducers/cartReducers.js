@@ -1,4 +1,4 @@
-import { ADD_TO_CART, ADD_COUNT, SUB_COUNT, CONVERT_TOTAL } from '../Types';
+import { ADD_TO_CART, ADD_COUNT, SUB_COUNT } from '../Types';
 
 
 let currentCart = JSON.parse(window.localStorage.getItem('data')) || [];
@@ -16,16 +16,16 @@ export const cartReducer = (state = initialState, action) => {
 
       const currentProduct = action.payload
       let amountIndex = parseInt(window.localStorage.getItem('SelectedCurrency'))
-      let currentAmount = currentProduct.prices[amountIndex].amount * currentProduct.count
+      // let currentAmount = currentProduct.prices[amountIndex].amount * currentProduct.count
+      
+      let exist = false 
 
-      let exist = false    
       // check if item exist
       currentCart.forEach((localProduct) => {  
         if(checkLocalStorage(currentProduct.attributes, localProduct.attributes))
         {
           exist = true;
           console.log('item exist')
-
           let local_total = JSON.parse(window.localStorage.getItem('total'))
           local_total += currentProduct.prices[amountIndex].amount;
           window.localStorage.setItem('total', JSON.stringify(local_total))
@@ -47,31 +47,27 @@ export const cartReducer = (state = initialState, action) => {
       };
       
       // item not in cart
-      if (exist == false) {
+      if (exist === false) {
         state.quantity += 1
         console.log('item does not exist')
         
         let amountIndex = parseInt(window.localStorage.getItem('SelectedCurrency'))
-        let currentAmount = currentProduct.prices[amountIndex].amount * currentProduct.count
-
         currentCart.push(currentProduct)
-        let arr = window.localStorage.setItem('data', JSON.stringify(currentCart))
+        window.localStorage.setItem('data', JSON.stringify(currentCart))
 
         let local_total = JSON.parse(window.localStorage.getItem('total'))
-        
         local_total += currentProduct.prices[amountIndex].amount 
-        let localTotal = window.localStorage.setItem('total', JSON.stringify(local_total))
+        window.localStorage.setItem('total', JSON.stringify(local_total))
         
         return {
           ...state,
           cart: [...currentCart]
         }
       }
-
-    case ADD_COUNT: 
+      break
+      
+      case ADD_COUNT: 
       let attributes = action.payload
-
-      let updateLocalcount = JSON.parse(window.localStorage.getItem('data'))
       let priceIndex = JSON.parse(window.localStorage.getItem('SelectedCurrency'))
       let localTotal = JSON.parse(window.localStorage.getItem('total'))
 
@@ -104,22 +100,26 @@ export const cartReducer = (state = initialState, action) => {
 
     case SUB_COUNT:
       let currentAttributes = action.payload
-
-      let updateLocalsub = JSON.parse(window.localStorage.getItem('data'))
-      let product_price_Index = parseInt(window.localStorage.getItem('SelectedCurrency'))
+      let price_Index = parseInt(window.localStorage.getItem('SelectedCurrency'))
       let localTotal_sub = JSON.parse(window.localStorage.getItem('total'))
 
-      currentCart.forEach((localProduct) => {
-        if(isEqual(currentAttributes, localProduct.attributes)){
+      currentCart.map((localObj, index) => {
+        if(isEqual(currentAttributes, localObj.attributes)){
+          if(localObj.count === 0){
+            currentCart.splice(index, 1)
+            state.quantity -= 1
+            return window.localStorage.setItem('data', JSON.stringify(currentCart))
+          }
 
-          localProduct.count != 0 && (localProduct.count = localProduct.count - 1)
+          localObj.count !== 0 && (localObj.count -= 1)
           window.localStorage.setItem('data', JSON.stringify(currentCart))
 
-          if(localTotal_sub != 0) {
-            localTotal_sub -= localProduct.prices[product_price_Index].amount
+          if(localTotal_sub !== 0) {
+            localTotal_sub -= localObj.prices[price_Index].amount
           }
           window.localStorage.setItem('total', JSON.stringify(localTotal_sub))
         }
+        return null
       })
 
       function isEqual (attributes, localProduct_attributes) {
@@ -135,7 +135,7 @@ export const cartReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        cart: [...state.cart]
+        cart: [...currentCart]
       }
 
     default:

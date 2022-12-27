@@ -25,7 +25,6 @@ import {
   Price,
   CartInfo,
   AttributeName,
-  DecreaseIcon,
   AddCount,
   SubCount,
   Count,
@@ -109,7 +108,6 @@ class CartItem extends Component {
           <AddCount onClick={() => this.props.addCount(attributes)} >
             <IncreaseIcon>
               <img src={incIcon} alt="" />
-              {/* <VerticalIcon src={increase} /> */}
             </IncreaseIcon>
           </AddCount>
 
@@ -117,7 +115,6 @@ class CartItem extends Component {
           
           <SubCount onClick={() => this.props.subCount(attributes)}>
             <img src={decIcon} alt="" />
-            {/* <DecreaseIcon src={decIcon} /> */}
           </SubCount>
         </MidContainer>
 
@@ -126,7 +123,7 @@ class CartItem extends Component {
             <Image src={gallery[this.state.imageIndex]} alt="product image" />
             {
               !noArrows && 
-              gallery.length != 1 &&
+              gallery.length !== 1 &&
               (
                 <>
                   <PrevNext direction="right" onClick={() => this.handleNext(imageIndex, gallery)}>
