@@ -85,6 +85,7 @@ class ProductDetail extends Component {
   render() {
     let { id } = this.props.match.params;
     const { index, currentCount } = this.state;
+    const { currentCurrency: {currentCurrency} } = this.props
 
     return (
       <Container>
@@ -161,4 +162,4 @@ class ProductDetail extends Component {
   }
 }
 
-export default connect(null,{ addToCart })(ProductDetail)
+export default connect((state) => ({currentCurrency: state.currency}),{ addToCart })(ProductDetail)

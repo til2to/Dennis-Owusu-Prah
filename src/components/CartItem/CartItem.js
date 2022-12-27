@@ -57,7 +57,7 @@ class CartItem extends Component {
   render() {
     let { name, brand, gallery, attributes, prices } = this.props.item
     let updateLocalcount = JSON.parse(window.localStorage.getItem('data'))
-    const { noArrows } = this.props
+    const { noArrows, currentCurrency: {currentCurrency} } = this.props
     const { imageIndex } = this.state
 
     let currentCount;
@@ -145,5 +145,5 @@ class CartItem extends Component {
   }
 }
 
-export default connect((state) => ({ cartItems: state.cart.cart }),
-  { addCount, subCount })(CartItem)
+export default connect((state) => ({ cartItems: state.cart.cart, currentCurrency: state.currency }),
+  { addCount, subCount, })(CartItem)

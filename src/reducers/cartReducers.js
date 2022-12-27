@@ -70,17 +70,16 @@ export const cartReducer = (state = initialState, action) => {
 
     case ADD_COUNT: 
       let attributes = action.payload
-      let cartProducts = state.cart
 
       let updateLocalcount = JSON.parse(window.localStorage.getItem('data'))
       let priceIndex = JSON.parse(window.localStorage.getItem('SelectedCurrency'))
       let localTotal = JSON.parse(window.localStorage.getItem('total'))
 
-      updateLocalcount.forEach((localProduct) => {  
+      currentCart.forEach((localProduct) => {  
         if(isSame(attributes, localProduct.attributes)){
           
           localProduct.count = localProduct.count + 1
-          window.localStorage.setItem('data', JSON.stringify(updateLocalcount))
+          window.localStorage.setItem('data', JSON.stringify(currentCart))
           
           localProduct.count >= 1 && (localTotal += localProduct.prices[priceIndex].amount)
           window.localStorage.setItem('total', JSON.stringify(localTotal))
@@ -105,17 +104,16 @@ export const cartReducer = (state = initialState, action) => {
 
     case SUB_COUNT:
       let currentAttributes = action.payload
-      let cartsProducts = state.cart
 
       let updateLocalsub = JSON.parse(window.localStorage.getItem('data'))
       let product_price_Index = parseInt(window.localStorage.getItem('SelectedCurrency'))
       let localTotal_sub = JSON.parse(window.localStorage.getItem('total'))
 
-      updateLocalsub.forEach((localProduct) => {
+      currentCart.forEach((localProduct) => {
         if(isEqual(currentAttributes, localProduct.attributes)){
 
           localProduct.count != 0 && (localProduct.count = localProduct.count - 1)
-          window.localStorage.setItem('data', JSON.stringify(updateLocalsub))
+          window.localStorage.setItem('data', JSON.stringify(currentCart))
 
           if(localTotal_sub != 0) {
             localTotal_sub -= localProduct.prices[product_price_Index].amount

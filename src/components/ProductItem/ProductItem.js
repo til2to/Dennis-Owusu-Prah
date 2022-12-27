@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import basket from '../../images/basket.png'
 import { connect } from 'react-redux';
-import { addToCart } from '../../actions/cartActions'
+import { addToCart } from '../../actions/cartActions';
 
 import {
   Container,
@@ -34,8 +34,11 @@ class ProductItem extends Component {
   render() {
     const { selectedCurrency } = this.state
     const { name, brand, gallery, id, prices, inStock, attributes} = this.props.prod;
+    const { currentCurrency: {currentCurrency} } = this.props
+
+    console.log(currentCurrency)
     let currentProduct = this.props.prod
-    
+
     return (
       <Container style={!inStock ? { pointerEvents: 'none', opacity: 0.55 } : {}}>
           <Wrapper>
@@ -64,7 +67,7 @@ class ProductItem extends Component {
               
               <PriceItems>
                 <CurrencySymbol>
-                  {prices[selectedCurrency].currency.symbol} {prices[selectedCurrency].amount}
+                  {prices[currentCurrency].currency.symbol} {prices[currentCurrency].amount}
                 </CurrencySymbol>
               </PriceItems>
             </ProductInfo>
@@ -74,4 +77,5 @@ class ProductItem extends Component {
   }
 }
 
-export default connect(null, { addToCart })(ProductItem)
+export default connect((state) => ({ currentCurrency: state.currency }),
+ { addToCart, })(ProductItem)

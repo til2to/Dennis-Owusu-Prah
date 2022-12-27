@@ -37,7 +37,7 @@ class MyBag extends Component {
             <span>My Bag {quantity} items</span>
           </Title>
           {
-            cart.map((item, index) => (
+            cart?.map((item, index) => (
               <CartItem key={index} item={item} noArrows={true} />
             ))
           }
@@ -46,7 +46,7 @@ class MyBag extends Component {
             {
               cart[0] &&
               <Amount>
-                { cart[0].prices[selectedCurrency].currency.symbol } {parseFloat(cartTotal).toFixed(2)}
+                { cart[0]?.prices[selectedCurrency]?.currency.symbol } {parseFloat(cartTotal).toFixed(2)}
               </Amount>
             }
           </Total>

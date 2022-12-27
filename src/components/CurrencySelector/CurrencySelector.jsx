@@ -20,9 +20,9 @@ class CurrencySelector extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      defaultCurrency: JSON.parse(window.localStorage.getItem('SelectedCurrency')),
+      defaultCurrency: 0,
       open: false,
-      currencyChanger: 0,
+      // currencyChanger: 0,
       reload: false,
     }
   };
@@ -55,27 +55,34 @@ class CurrencySelector extends Component {
     }
   };
 
-  setCurrency = async (type) => {
-    window.localStorage.setItem('SelectedCurrency', JSON.stringify(type))
-    let currentCurrency = JSON.parse(window.localStorage.getItem('SelectedCurrency'))
+  setCurrency = (type) => {
+    // window.localStorage.setItem('SelectedCurrency', JSON.stringify(type))
+    // let currentCurrency = JSON.parse(window.localStorage.getItem('SelectedCurrency'))
+    
     this.setState({
-      defaultCurrency: currentCurrency,
+      defaultCurrency: type,
       open: false,
     });
     
-    let products = JSON.parse(window.localStorage.getItem('data')) || []
+    // 
+    this.props.changeCurrency(type)
+    
+    console.log(type)
 
-    window.localStorage.setItem('total', 0)
-    let amountIndex = parseInt(window.localStorage.getItem('SelectedCurrency'))
 
-    let productAmount, value = [];
-    products.forEach((product, index) => {
-      productAmount = (product.prices[amountIndex].amount * product.count) 
-      value.push(productAmount)
-    })
-    const sum = value.reduce(
-      (initialValue, currentValue) => initialValue + currentValue, 0);
-    window.localStorage.setItem('total', JSON.stringify(sum))
+    // let products = JSON.parse(window.localStorage.getItem('data')) || []
+
+    // window.localStorage.setItem('total', 0)
+    // let amountIndex = parseInt(window.localStorage.getItem('SelectedCurrency'))
+
+    // let productAmount, value = [];
+    // products.forEach((product, index) => {
+    //   productAmount = (product.prices[amountIndex].amount * product.count) 
+    //   value.push(productAmount)
+    // })
+    // const sum = value.reduce(
+    //   (initialValue, currentValue) => initialValue + currentValue, 0);
+    // window.localStorage.setItem('total', JSON.stringify(sum))
   }
 
   render() {
@@ -110,4 +117,4 @@ class CurrencySelector extends Component {
 }
 
 export default connect((state)=> ({currency: state.currentCurrency}), 
-{ convertTotal, changeCurrency })(CurrencySelector)
+{ changeCurrency })(CurrencySelector)

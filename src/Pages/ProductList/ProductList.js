@@ -11,9 +11,11 @@ import {
 } from './ProductListElements'
 
 class ProductList extends Component {
+  
   render() {
     let { name } = this.props.match.params
     const pageSize = 12;
+
     return (
       <Container>
         <CategoryName>
