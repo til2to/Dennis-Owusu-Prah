@@ -64,13 +64,16 @@ class ProductDetail extends Component {
       
       result.map(el => {
         newAttributes.push(el)
+        return null
       })
+      
       this.props.addToCart(copied)
+      newAttributes = []
     }
 
     else {
-      const added = this.props.addToCart(copied)
-      // newAttributes = []
+      this.props.addToCart(copied)
+      newAttributes = []
     }
   };
 
@@ -78,14 +81,9 @@ class ProductDetail extends Component {
     this.setState({ index: index });
   };
 
-  componentDidMount() {
-    const { index } = this.state;
-  }
-
   render() {
     let { id } = this.props.match.params;
-    const { index, currentCount } = this.state;
-    const { currentCurrency: {currentCurrency} } = this.props
+    const { index } = this.state;
 
     return (
       <Container>
@@ -137,15 +135,15 @@ class ProductDetail extends Component {
                       </AttributePrice>
                     </PriceInfo>
                   </AttributesContainer>
-                  {attributes !== "" ? (
+                  {attributes !== [] ? (
                     <Button 
                     onClick={() => this.submitToCart({ ...currentProduct, count:1 })}>
                       ADD TO CART
                     </Button>
                   ) : (
                     <Empty>
-                      {/* Sorry! no attributes to select. Product already added to
-                      cart */}
+                      Sorry! no attributes to select. Product already added to
+                      cart
                       {console.log('attributes empty')}
                     </Empty>
                   )}

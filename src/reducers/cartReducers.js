@@ -2,7 +2,7 @@ import { ADD_TO_CART, ADD_COUNT, SUB_COUNT } from '../Types';
 
 
 let currentCart = JSON.parse(window.localStorage.getItem('data')) || [];
-let currentTotal = JSON.parse(window.localStorage.getItem('total'))
+let currentTotal = JSON.parse(window.localStorage.getItem('total')) || 0
 
 const initialState = {
   cart: currentCart,
@@ -16,7 +16,6 @@ export const cartReducer = (state = initialState, action) => {
 
       const currentProduct = action.payload
       let amountIndex = parseInt(window.localStorage.getItem('SelectedCurrency'))
-      // let currentAmount = currentProduct.prices[amountIndex].amount * currentProduct.count
       
       let exist = false 
 
@@ -64,7 +63,10 @@ export const cartReducer = (state = initialState, action) => {
           cart: [...currentCart]
         }
       }
-      break
+      return {
+        ...state,
+        cart: [...currentCart]
+      }
       
       case ADD_COUNT: 
       let attributes = action.payload
@@ -114,7 +116,7 @@ export const cartReducer = (state = initialState, action) => {
           localObj.count !== 0 && (localObj.count -= 1)
           window.localStorage.setItem('data', JSON.stringify(currentCart))
 
-          if(localTotal_sub !== 0) {
+          if(localTotal_sub > 0) {
             localTotal_sub -= localObj.prices[price_Index].amount
           }
           window.localStorage.setItem('total', JSON.stringify(localTotal_sub))

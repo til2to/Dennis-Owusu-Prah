@@ -54,10 +54,10 @@ class CartItem extends Component {
   }
 
   render() {
+    const { noArrows } = this.props
+    const { imageIndex } = this.state
     let { name, brand, gallery, attributes, prices } = this.props.item
     let updateLocalcount = JSON.parse(window.localStorage.getItem('data'))
-    const { noArrows, currentCurrency: {currentCurrency} } = this.props
-    const { imageIndex } = this.state
 
     let currentCount;
     updateLocalcount.forEach((localProduct) => {
@@ -120,7 +120,7 @@ class CartItem extends Component {
 
         <RightContainer>
           <Direction>
-            <Image src={gallery[this.state.imageIndex]} alt="product image" />
+            <Image src={gallery[imageIndex]} alt="product image" />
             {
               !noArrows && 
               gallery.length !== 1 &&

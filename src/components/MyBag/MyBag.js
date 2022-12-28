@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import CartItem from '../CartItem/CartItem';
@@ -17,18 +17,13 @@ import {
 
 
 class MyBag extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedCurrency: JSON.parse(window.localStorage.getItem("SelectedCurrency")),
-    };
-  }
   static propTypes = {}
 
   render() {
-    const { cartItems: {cart, quantity, total}, overlayToggle, hideOverlay } = this.props;
+    const { cartItems: {cart, quantity }, hideOverlay } = this.props;
+    
     let cartTotal = window.localStorage.getItem('total')
-    const { selectedCurrency } = this.state
+    let price_index = JSON.parse(window.localStorage.getItem('SelectedCurrency'))
 
     return (
       <Container>
@@ -46,7 +41,7 @@ class MyBag extends Component {
             {
               cart[0] &&
               <Amount>
-                { cart[0]?.prices[selectedCurrency]?.currency.symbol } {parseFloat(cartTotal).toFixed(2)}
+                { cart[0]?.prices[price_index]?.currency.symbol } {parseFloat(cartTotal).toFixed(2)}
               </Amount>
             }
           </Total>
@@ -65,5 +60,5 @@ class MyBag extends Component {
   }
 }
 
-export default connect((state) => ({ cartItems: state.cart }),
+export default connect((state) => ({ cartItems: state.cart, currentCurrency: state.currency }),
   null)(MyBag)

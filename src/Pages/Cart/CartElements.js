@@ -20,14 +20,14 @@ export const Button = styled.div`
   color: white;
   background-color: #5ECE7B;
   height: 40px;
-  width: 250px;
+  width: 210px;
   display: flex;
   justify-content: center;
   border-radius: 3px; 
   opacity: 0.85;
-  font-size: 13px;
+  font-size: 15px;
   cursor: pointer;
-  margin: 15px 0;
+  margin: 13px 0;
   align-items: center;  
 `
 export const TaxInfo = styled.div`

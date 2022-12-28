@@ -10,6 +10,8 @@ export const ProductSelector = styled.div`
   opacity: 0;
 `
 export const Container = styled.div`
+  pointer-events: ${props => props.instock === false ? 'none' : {}};
+  opacity: ${props => props.instock === false ? '0.55' : {}};
   flex: 1;
   max-width: 370px;
   margin-bottom: 15px;
@@ -31,10 +33,9 @@ export const ProductImage = styled.div`
   width: 310px;
   height: 300px;
   position: relative;
-
   &:hover{
     opacity: 0.8;
-}
+  }
 `
 export const Gallery = styled.img`
   object-fit: none;
@@ -43,7 +44,7 @@ export const Gallery = styled.img`
   position: relative;
 `
 export const ImageG = styled.div`
-position: relative;
+  position: relative;
 `
 export const Stock = styled.div`
   position: absolute;

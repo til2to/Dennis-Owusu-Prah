@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import CartItem from '../../components/CartItem/CartItem';
-import { addCount, subCount } from '../../actions/cartActions'
 
 import {
   Container,
@@ -16,18 +15,11 @@ import {
 
 
 class Cart extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedCurrency: JSON.parse(window.localStorage.getItem("SelectedCurrency")),
-    };
-  }
-
   render() {
-    let { cartItems: { cart, quantity, total } } = this.props;
+    let { cartItems: { cart, quantity },  } = this.props;
     let cartTotal = JSON.parse(window.localStorage.getItem('total'))
+    let price_index = JSON.parse(window.localStorage.getItem('SelectedCurrency'))
     let local_data = JSON.parse(window.localStorage.getItem('data'))
-    const { selectedCurrency } = this.state;
     let tax = 0.21 * cartTotal
 
     console.log(local_data)
@@ -48,11 +40,17 @@ class Cart extends Component {
             ) )
           }
           <TaxInfo>
-            <Items style={{ marginTop: '20px' }}>Tax: {cart[0] && cart[0].prices[selectedCurrency].currency.symbol } {tax.toFixed(2)}</Items>
+            <Items>
+              Tax: {cart[0] && cart[0].prices[price_index].currency.symbol } {tax.toFixed(2)}
+            </Items>
             <Items>Quantity: {quantity}</Items>
-            {cart[0] && <Items>
-              Total: { cart[0].prices[selectedCurrency].currency.symbol } {parseFloat(cartTotal).toFixed(2)} 
-            </Items>}
+            {
+            cart[0] && 
+              <Items>
+                Total: { cart[0].prices[price_index].currency.symbol }
+                {''} {parseFloat(cartTotal).toFixed(2)} 
+              </Items>
+            }
           </TaxInfo>
           <Button> ORDER </Button>
         </Wrapper>
@@ -61,5 +59,4 @@ class Cart extends Component {
   }
 }
 
-export default connect((state) => ({ cartItems: state.cart }),
-  { addCount, subCount })(Cart)
+export default connect((state) => ({ cartItems: state.cart, currentCurrency: state.currency }), null)(Cart)

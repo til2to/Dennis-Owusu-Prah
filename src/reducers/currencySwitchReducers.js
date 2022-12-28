@@ -1,27 +1,23 @@
 import { CHANGE_CURRENCY } from '../Types';
 
+
+let currency = JSON.parse(window.localStorage.getItem('SelectedCurrency'));
 const initialState = {
-  currentCurrency: 0
+  currentCurrency: currency
 };
 
 export const currencyReducer = (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_CURRENCY:
-      state.currentCurrency = action.payload
-      console.log(state.currentCurrency)
+      currency = action.payload
 
-      window.localStorage.setItem('SelectedCurrency', JSON.stringify(state.currentCurrency))
-      let currencyIndex = JSON.parse(window.localStorage.getItem('SelectedCurrency'))
-      console.log(currencyIndex)
-
+      window.localStorage.setItem('SelectedCurrency', JSON.stringify(currency))
       let products = JSON.parse(window.localStorage.getItem('data')) || []
-
       window.localStorage.setItem('total', 0)
-      // let amountIndex = parseInt(window.localStorage.getItem('SelectedCurrency'))
 
       let productAmount, value = [];
       products.forEach((product, index) => {
-        productAmount = (product.prices[currencyIndex].amount * product.count) 
+        productAmount = (product.prices[currency].amount * product.count) 
         value.push(productAmount)
       })
       const sum = value.reduce(
@@ -29,10 +25,8 @@ export const currencyReducer = (state = initialState, action) => {
 
       window.localStorage.setItem('total', JSON.stringify(sum))
 
-      // return {
-      //   ...state,
-      //   currentCurrency: {...state.currentCurrency}
-      // }
+      return currency
+
     default:
       return state;
   }

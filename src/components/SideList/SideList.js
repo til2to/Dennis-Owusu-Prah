@@ -17,14 +17,14 @@ export class SideList extends Component {
     return (
       <Container>
         <Wrapper>
-          <div className='side_images' ref={myRef}>
+          <>
             {
             gallery.map((gallery_item, index) => (
               <SideImage src={gallery_item} key={index} 
               onClick={()=>tab(index)}/>
             ))
           }
-          </div>
+          </>
         </Wrapper>
       </Container>
     )

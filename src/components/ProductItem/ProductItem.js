@@ -24,29 +24,23 @@ import {
 
 class ProductItem extends Component {
   static propTypes = {}
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedCurrency: JSON.parse(window.localStorage.getItem("SelectedCurrency")),
-    };
-  }
 
   render() {
-    const { selectedCurrency } = this.state
     const { name, brand, gallery, id, prices, inStock, attributes} = this.props.prod;
-    const { currentCurrency: {currentCurrency} } = this.props
-
-    console.log(currentCurrency)
     let currentProduct = this.props.prod
 
+    let price_index = JSON.parse(window.localStorage.getItem('SelectedCurrency'))
+
     return (
-      <Container style={!inStock ? { pointerEvents: 'none', opacity: 0.55 } : {}}>
+      <Container instock={inStock}>
           <Wrapper>
             <ProductImage>
               <ImageG>
                 <Gallery src={gallery[0]} />
-                {!inStock &&
-                  <Stock>OUT OF STOCK</Stock>}
+                {
+                  !inStock &&
+                  <Stock>OUT OF STOCK</Stock>
+                }
               </ImageG>
               <Link to={`/product/${id}`}> 
                 { 
@@ -67,7 +61,7 @@ class ProductItem extends Component {
               
               <PriceItems>
                 <CurrencySymbol>
-                  {prices[currentCurrency].currency.symbol} {prices[currentCurrency].amount}
+                  {prices[price_index].currency.symbol} {prices[price_index].amount}
                 </CurrencySymbol>
               </PriceItems>
             </ProductInfo>

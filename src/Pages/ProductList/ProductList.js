@@ -14,7 +14,7 @@ class ProductList extends Component {
   
   render() {
     let { name } = this.props.match.params
-    const pageSize = 12;
+    const pageSize = 5;
 
     return (
       <Container>
