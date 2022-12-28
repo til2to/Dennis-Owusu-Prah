@@ -24,7 +24,7 @@ export const Image = styled.img`
   display: flex;
   border: 0.5px;
   widht: 400px;
-  height: 450px;
+  height: 400px;
 `;
 export const ProductInfo = styled.div`
   display: flex;
@@ -87,6 +87,9 @@ export const ProductDescription = styled.div`
 export const SideImgContainer = styled.div`
   margin-left: 20px;
   margin-top: 100px;
+
+  display: flex;
+  justify-content: flex-end;
 `;
 export const SideWrapper = styled.div`
   margin-left: 20px;
@@ -94,16 +97,20 @@ export const SideWrapper = styled.div`
   justify-content: flex-end;
   flex-direction: column;
 `;
-export const SideImageC = styled.img`
-  max-width: 130px;
-  height: 90px;
-  object-fit: contain;
-  margin-bottom: 5px;
-  cursor: pointer;
-`;
+
 export const Empty = styled.span`
   color: red;
   font-size: 18px;
   font-weight: 500px;
   flex-wrap: wrap;
 `;
+
+export const SideImage = styled.img`
+  width: 130px;
+  height: 90px; 
+  object-fit: contain;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+  cursor: pointer;
+`

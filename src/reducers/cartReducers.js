@@ -51,7 +51,7 @@ export const cartReducer = (state = initialState, action) => {
         console.log('item does not exist')
         
         let amountIndex = parseInt(window.localStorage.getItem('SelectedCurrency'))
-        currentCart.push(currentProduct)
+        currentCart.unshift(currentProduct)
         window.localStorage.setItem('data', JSON.stringify(currentCart))
 
         let local_total = JSON.parse(window.localStorage.getItem('total'))

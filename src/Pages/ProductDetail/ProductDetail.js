@@ -22,7 +22,8 @@ import {
   SideImgContainer,
   ProductImg,
   AttributesContainer,
-  ProductDescription
+  ProductDescription,
+  SideImage,
 } from './ProductDetailElements'
 
 
@@ -66,7 +67,7 @@ class ProductDetail extends Component {
         newAttributes.push(el)
         return null
       })
-      
+
       this.props.addToCart(copied)
       newAttributes = []
     }
@@ -77,7 +78,7 @@ class ProductDetail extends Component {
     }
   };
 
-  handleTab = (index) => {
+  selectImage = (index) => {
     this.setState({ index: index });
   };
 
@@ -99,7 +100,13 @@ class ProductDetail extends Component {
               <Wrapper>
                 <SideImgContainer>
                   <SideWrapper>
-                    <SideList gallery={gallery} tab={this.handleTab} />
+                    {
+                      gallery.map((item, index) => (
+                        <SideImage src={item} key={index} 
+                        onClick={()=>this.selectImage(index)}
+                        />
+                      ))
+                    }
                   </SideWrapper>
                 </SideImgContainer>
                 <ProductImg>

@@ -12,19 +12,17 @@ export class SideList extends Component {
   static propTypes = {}
 
   render() {
-    const {gallery, tab, myRef} = this.props;
+    const {gallery, tab } = this.props;
   
     return (
       <Container>
         <Wrapper>
-          <>
-            {
-            gallery.map((gallery_item, index) => (
-              <SideImage src={gallery_item} key={index} 
+          {
+            gallery.map((item, index) => (
+              <SideImage src={item} key={index} 
               onClick={()=>tab(index)}/>
             ))
           }
-          </>
         </Wrapper>
       </Container>
     )

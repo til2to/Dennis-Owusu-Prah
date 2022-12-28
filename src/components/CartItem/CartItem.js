@@ -92,8 +92,8 @@ class CartItem extends Component {
                 <AttributesItems key={item.color}>
                   {
                     item.name === 'Color' ?
-                    <ColorContainer style={{ backgroundColor: item.value, border: "1px solid #1d1f22" }} 
-                    key={item.id}
+                    <ColorContainer key={item.id} 
+                    style={{ backgroundColor: item.value, border: "1px solid #1d1f22" }}
                     />
                     :
                     <AttributesCont>{item.value}</AttributesCont>

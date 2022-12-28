@@ -24,12 +24,13 @@ class MyBag extends Component {
     
     let cartTotal = window.localStorage.getItem('total')
     let price_index = JSON.parse(window.localStorage.getItem('SelectedCurrency'))
-
+    
     return (
-      <Container>
+      <Container quantity={quantity}>
         <Wrapper>
           <Title>
-            <span>My Bag {quantity} items</span>
+            {quantity === 0 && (<h>Please add product(s)</h>)}
+            {quantity > 0 && <span>My Bag {quantity} Items</span>}
           </Title>
           {
             cart?.map((item, index) => (
@@ -39,9 +40,14 @@ class MyBag extends Component {
           <Total>
             <Text>Total</Text>
             {
-              cart[0] &&
+              cart[0] ?
               <Amount>
-                { cart[0]?.prices[price_index]?.currency.symbol } {parseFloat(cartTotal).toFixed(2)}
+                { cart[0].prices[price_index].currency.symbol } 
+                {parseFloat(cartTotal).toFixed(2)}
+              </Amount>
+              : 
+              <Amount>
+                {parseFloat(cartTotal).toFixed(2)}
               </Amount>
             }
           </Total>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   padding: 7px;
-  height: 100%;
+  height: ${props => props.quantity === 0 ? '30%' : '100%'};
   overflow-y: scroll;
   max-width: 410px;
   background-color: white;

@@ -19,7 +19,7 @@ export const Container = styled.div`
 
   &:hover ${ProductSelector}{
     opacity: 1
-}
+  }
 `
 export const Wrapper = styled.div`
   display: flex;

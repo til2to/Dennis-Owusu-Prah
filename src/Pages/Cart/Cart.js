@@ -17,13 +17,13 @@ import {
 class Cart extends Component {
   render() {
     let { cartItems: { cart, quantity },  } = this.props;
-    let cartTotal = JSON.parse(window.localStorage.getItem('total'))
-    let price_index = JSON.parse(window.localStorage.getItem('SelectedCurrency'))
+    let cartTotal = JSON.parse(window.localStorage.getItem('total')) || 0
+    let price_index = JSON.parse(window.localStorage.getItem('SelectedCurrency')) || 0
     let local_data = JSON.parse(window.localStorage.getItem('data'))
     let tax = 0.21 * cartTotal
-
-    console.log(local_data)
     
+    // cart.length === 0 ? cart[0] = 0 : cart[0] = cart[0]
+    console.log(cart[0])
     return (
       <Container>
         <Wrapper>
@@ -41,14 +41,19 @@ class Cart extends Component {
           }
           <TaxInfo>
             <Items>
-              Tax: {cart[0] && cart[0].prices[price_index].currency.symbol } {tax.toFixed(2)}
+              Tax: {cart[0] && cart[0]?.prices[price_index]?.currency.symbol } 
+              {tax.toFixed(2)}
             </Items>
             <Items>Quantity: {quantity}</Items>
             {
-            cart[0] && 
+            cart[0] ?
               <Items>
                 Total: { cart[0].prices[price_index].currency.symbol }
                 {''} {parseFloat(cartTotal).toFixed(2)} 
+              </Items>
+              :
+              <Items>
+                Total: {parseFloat(cartTotal).toFixed(2)} 
               </Items>
             }
           </TaxInfo>
