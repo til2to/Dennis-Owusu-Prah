@@ -15,8 +15,3 @@ export const subCount = (payload) => ({
   type: SUB_COUNT,
   payload
 });
-
-export const convertTotal = (payload) => ({
-  type: CONVERT_TOTAL,
-  payload
-});

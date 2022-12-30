@@ -5,6 +5,7 @@ import { currencyReducer } from '../reducers/currencySwitchReducers';
 
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// Add the two reducers to the store
 const store = createStore(
   combineReducers({
     cart: cartReducer,

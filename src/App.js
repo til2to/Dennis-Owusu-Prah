@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom';
 import "./App.css";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
@@ -22,6 +21,7 @@ import { Query } from "react-apollo";
 class App extends Component {
   constructor(props) {
     super(props);
+    /* state to hold to get and hold the currencies from local storage */ 
     this.state = {
       currency: window.localStorage.getItem("Currency") || [],
       selectedCurrency: window.localStorage.getItem("SelectedCurrency"),
@@ -30,10 +30,11 @@ class App extends Component {
 
   async componentDidMount() {
     const { selectedCurrency } = this.state
-    // if(currency === null) window.localStorage.setItem("Currency", []);
+    // set the currency to first currency whenever there's is undefined
     if(selectedCurrency === null) window.localStorage.setItem("SelectedCurrency", "0");
   }
 
+  // function to store the currencies from the api to the local storage
   async setCurrency (data) {
     const res = await window.localStorage.setItem("Currency", JSON.stringify(data))
   }
@@ -43,18 +44,21 @@ class App extends Component {
 
     return (
       <>
+      {/* fetch currencies from api */}
         {
           currency && (
             <Query query={PRICE_QUERY}>
               {({ data, loading, error }) => {
                 if (loading) return <h1>loading</h1>
                 if (error) return <h1>{error.message}</h1>;
-
+                {/* set currencies of first product to the local storage at once */} 
                 this.setCurrency(data?.category?.products[0]?.prices);
               }}
             </Query>
           )
         }
+        
+        {/* Connect store to the app */}
         <Provider store={store}>
           <Router>
             <Container>
@@ -62,9 +66,12 @@ class App extends Component {
             </Container>
             <div className="app">
               <Switch>
-                <Route exact path="/cart" component={Cart} />
-                <Route path="/product/:id" component={Product} />
-                <Route path="/products/:name" component={Products} />
+                {/* path to the cart */} 
+                <Route exact path="/cart" component={Cart} /> 
+                {/* path based on product id */}
+                <Route path="/product/:id" component={Product} /> 
+                {/* path based on category name */} 
+                <Route path="/products/:name" component={Products} /> 
                 <Route exact path="/">
                   <Redirect to="/products/all/" />
                 </Route>

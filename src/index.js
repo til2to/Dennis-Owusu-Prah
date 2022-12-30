@@ -14,24 +14,13 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 })
 
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <ApolloProvider client={client}>
-//       <App />
-//     </ApolloProvider>
-//   </React.StrictMode>,
-//   document.getElementById("root")
-// );
-
 const rootContainer = document.getElementById("root");
 const root = createRoot(rootContainer);
 
-root.render( 
-  // <React.StrictMode>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
-  // </React.StrictMode>
+root.render(
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
