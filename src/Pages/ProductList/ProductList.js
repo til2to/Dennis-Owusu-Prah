@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import ProductItem from '../../components/ProductItem/ProductItem'
 import { ALLPRODUCT_QUERY } from '../../Data/GraphqlData'
-import { connect } from 'react-redux';
 
 import {
   Container,
