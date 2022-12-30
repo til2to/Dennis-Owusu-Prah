@@ -156,7 +156,7 @@ You can deploy this project using:
 
 - [ ] *Add postgresql database*
 - [ ] *Add payment*
-- [ ] *Add more products*
+- [ ] *Currently working to deploy it.*
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

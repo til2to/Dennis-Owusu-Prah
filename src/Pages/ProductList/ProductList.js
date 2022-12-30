@@ -26,7 +26,7 @@ class ProductList extends Component {
         <Query query={ALLPRODUCT_QUERY} variables={{ title: name }}>
           {
             ({ data, loading, error }) => {
-              if (loading) return <h4> Loading.</h4>
+              if (loading) return <span> Loading.</span>
               if (error) console.log(error.message)
               
               return <Wrap>

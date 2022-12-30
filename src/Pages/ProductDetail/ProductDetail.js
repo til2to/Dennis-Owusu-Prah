@@ -101,7 +101,7 @@ class ProductDetail extends Component {
   };
 
   render() {
-    // use params to add the current product id to the url
+    /* use params to add the current product id to the url */
     let { id } = this.props.match.params;
     const { index } = this.state;
 
@@ -110,11 +110,13 @@ class ProductDetail extends Component {
         {/* Fetch the product and grab the it's id */}
         <Query query={PRODUCT_QUERY} variables={{ id: id }}>
           {({ loading, data, error }) => {
-            if (loading) return <h1>Loading...</h1>;
+            if (loading) return <span>Loading...</span>;
             if (error) console.log(error);
 
-            const { prices, gallery, name, brand, description, attributes } = data.product;
-            // use the all the properties to define the product
+            const { prices, gallery, name, brand, 
+              description, attributes } = data.product;
+              
+            /* use the all the properties to define the product */
             const currentProduct = data.product; 
 
             return (

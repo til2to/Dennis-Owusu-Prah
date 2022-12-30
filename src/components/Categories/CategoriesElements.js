@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 
 export const Container = styled.div`
+  z-index: 1;
 `
 export const Wrap = styled.div`
  display: flex;  
