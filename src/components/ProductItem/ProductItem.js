@@ -26,12 +26,17 @@ class ProductItem extends Component {
   static propTypes = {}
 
   render() {
+    /* 
+    Received props from productList page,
+    for the sending of a product at a time to the cart in the store
+    */ 
     const { name, brand, gallery, id, prices, inStock, attributes} = this.props.prod;
     let currentProduct = this.props.prod
 
     let price_index = JSON.parse(window.localStorage.getItem('SelectedCurrency'))
-
+ 
     return (
+      /* Add props to container to disable out of stock items */
       <Container instock={inStock}>
           <Wrapper>
             <ProductImage>
@@ -42,8 +47,13 @@ class ProductItem extends Component {
                   <Stock>OUT OF STOCK</Stock>
                 }
               </ImageG>
+              {/* Dynamically add the id of each product to it's url  */}
               <Link to={`/product/${id}`}> 
                 { 
+                  /*
+                  Add click event to send the current product to the cart,
+                  Also introduced count property to each product for the purpose of counting equal items
+                  */ 
                   attributes.length === 0 ?
                   (<ProductSelector onClick={() => this.props.addToCart({...currentProduct, count: 1})}>
                     <SelectIcon src={basket} />
@@ -71,5 +81,6 @@ class ProductItem extends Component {
   }
 }
 
+/* connect this component to the state for access to data and also dispatch actions */ 
 export default connect((state) => ({ currentCurrency: state.currency }),
  { addToCart, })(ProductItem)

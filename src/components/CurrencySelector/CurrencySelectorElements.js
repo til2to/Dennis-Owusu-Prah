@@ -6,6 +6,7 @@ position: relative;
 display: inline-block;
 left: 20px;
 `
+/* Add props to toggle the litle arrow at the currency symbol */
 export const Arrow = styled.img`
 width: 11px;
 position: relative;
@@ -32,6 +33,8 @@ border: 1px solid rgba(0, 0, 0, 0.04);
 background-color: white;
 box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
 `
+/* Add props to help in providing equal 
+spacing even with multi-lettered currencies.*/ 
 export const CurrencySymbol = styled.div`
 position: absolute;
 font-size: 22px;

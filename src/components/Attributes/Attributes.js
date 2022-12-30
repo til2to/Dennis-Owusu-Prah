@@ -15,6 +15,7 @@ class Attributes extends Component {
   static propTypes = {}
 
   render() {
+    // Incoming data as props from Product Detail component/Page
     const { item: { name, type, items }, handleClick, selectedAttributes } = this.props
 
     return (
@@ -22,6 +23,7 @@ class Attributes extends Component {
         <Wrapper>
           <AttributeName>{name} :</AttributeName>
           <AttributesContainer>
+            {/* Render attributes of products based on text or color code */}
             {
               type === 'swatch'
                 ?

@@ -22,6 +22,8 @@ class ProductList extends Component {
           Category {name}
         </CategoryName>
 
+        {/* Fetch data from graphql endpoint 
+        and pass to product item as props */}
         <Query query={ALLPRODUCT_QUERY} variables={{ title: name }}>
           {
             ({ data, loading, error }) => {
@@ -43,4 +45,4 @@ class ProductList extends Component {
   }
 }
 
-export default connect((state) => ({ products: state.products }))(ProductList)
+export default ProductList

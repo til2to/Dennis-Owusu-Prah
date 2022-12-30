@@ -26,30 +26,29 @@ import {
 class Navbar extends Component {
   constructor(props) {
     super(props);
+    /* State to hold the current state of the modal or overlay */ 
     this.state = {
       toggleOverlay: false,
-      currency: window.localStorage.getItem("Currency") || [],
     };
   }
   static propTypes = {};
 
+  /* function to toggle the overlay or modal  */ 
   showOverlay = () => {
     this.setState({
       toggleOverlay: !this.state.toggleOverlay,
     });
   };
 
+  /*function to close the overlay when other areas are clicked */ 
   hideOverlay = () => {
     this.setState({
       toggleOverlay: false,
     });
   };
 
-  currencySwitcher = (index) => {
-    window.localStorage.setItem("SelectCurrency", JSON.stringify(index))
-  }
-
   render() {
+    // Get the quantity of items/products in cart state.
     const { cartItems: { cart, quantity } } = this.props;
     const { toggleOverlay } = this.state;
 
@@ -68,13 +67,14 @@ class Navbar extends Component {
               <ArrowContainer>
                 <CurrencySelector />
               </ArrowContainer>
-
+              {/* Add click event to toggle the modal/overlay */}
               <MyBag_Bag onClick={()=>this.showOverlay()} >
                 <Bag>
                   <TotalItems>{quantity}</TotalItems>
                   <img src={basket_} alt="" />
                 </Bag>
               </MyBag_Bag>
+              {/* Add click event to close the overlay when outside area is clicked */}
               {toggleOverlay && 
               <Overlay  hideOverlay={this.hideOverlay} />}
             </CurrencyItems>
@@ -85,4 +85,5 @@ class Navbar extends Component {
   }
 }
 
+/* connect this component to the state for access to data */ 
 export default connect((state) => ({ cartItems: state.cart }), null)(Navbar);

@@ -15,11 +15,13 @@ class Categories extends Component {
 
   constructor(props){
     super(props)
+    // A state to hold the current tab or category
     this.state = {
       activeIndex: 0,
     }
   }
 
+  // function to handle the current category or tab
   handleActive = (activeMenu) => {
     this.setState({activeIndex: activeMenu})
   }
@@ -27,6 +29,7 @@ class Categories extends Component {
   render() {
     const { activeIndex } = this.state
 
+    // fecting the data belonging to categories
     return (
       <Query query={CATEGORIES_QUERY}>
         {
@@ -34,11 +37,13 @@ class Categories extends Component {
             if (loading) return <h3>loading in categories</h3>
             if (error) console.log(error.message)
 
+            // store all the categories data in an array
             const categoryArr = []
             data.categories.forEach((category) => {
               categoryArr.push(category.name)
             })
 
+            // loop through the array and render each category
             return <Wrap>
               {
                 categoryArr.map((category, index) => 

@@ -20,6 +20,7 @@ class MyBag extends Component {
   static propTypes = {}
 
   render() {
+    /* Data from the product cart, received props from the navbar component*/
     const { cartItems: {cart, quantity }, hideOverlay } = this.props;
     
     let cartTotal = window.localStorage.getItem('total')
@@ -33,6 +34,9 @@ class MyBag extends Component {
             {quantity > 0 && <span>My Bag {quantity} Items</span>}
           </Title>
           {
+            /* loop through the cart for products but most importantly 
+            prevent the MyBag component from using arrows */
+
             cart?.map((item, index) => (
               <CartItem key={index} item={item} noArrows={true} />
             ))
@@ -53,6 +57,8 @@ class MyBag extends Component {
           </Total>
 
           <ButtonsContainer>
+            {/* use props from navbar component for click event to toggle 
+            this component and these buttons */}
             <StyledLink to='/cart'>
               <Button onClick={hideOverlay}> VIEW BAG </Button>
             </StyledLink>
@@ -66,5 +72,6 @@ class MyBag extends Component {
   }
 }
 
+/* connect this component to the state for access to data */ 
 export default connect((state) => ({ cartItems: state.cart, currentCurrency: state.currency }),
   null)(MyBag)

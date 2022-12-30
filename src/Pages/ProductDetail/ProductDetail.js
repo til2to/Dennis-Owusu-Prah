@@ -30,6 +30,8 @@ import {
 class ProductDetail extends Component {
   constructor(props) {
     super(props);
+    /* state to hold the current image view of each product's main image,
+    Also holds the attributes to be selected for each product */ 
     this.state = {
       index: 0,
       product: {},
@@ -38,28 +40,38 @@ class ProductDetail extends Component {
 
   static propTypes = {};
 
+  /* function to handle the key value of product's attributes */ 
   handleClick = (property, propertyValue) => {
     this.setState({
       product: { ...this.state.product, [property]: propertyValue },
     });
   };
 
+  /* function to submit product to cart with the selected attributes */ 
   submitToCart = async (currentProduct) => {
     const objectArray = Object.entries(this.state.product); //convert object to array
-    let newAttributes = [];
+    let newAttributes = []; // new array for product's attributes
     objectArray.forEach(([key, value]) => {
       newAttributes.push({ name: key, value: value });
     });
 
+    // update the product's attributes
     let copied = JSON.parse(JSON.stringify(currentProduct));
     copied.attributes = newAttributes;
 
+    // Store the original attributes before selection
     let setAttribtes = []
  
+    /* compare the setAttributes to the selected attributes 
+    and use the differences as for preselection */ 
     if(copied.attributes.length !== currentProduct.length) {
       currentProduct.attributes.forEach((property) => {
+        /* store and structure the setAttributes array as the 
+        newAttributes array */
         setAttribtes.push({name: property.name, value: property.items[0].value})
       })
+      /* check for attributes in the setAttributes but not in the newAttributes
+      and put those attributes in the newAttributes  */ 
       let result = setAttribtes.filter(el1 => 
         !newAttributes.some(el2 => el1.name === el2.name));
       
@@ -68,38 +80,48 @@ class ProductDetail extends Component {
         return null
       })
 
+      /* now using the action, send current product with the selected 
+      and pre-selected attributes to cart in the store. */
       this.props.addToCart(copied)
       newAttributes = []
     }
 
+    /* if the length of the attributes arrays are equal, do nothing 
+    but send the product */ 
     else {
       this.props.addToCart(copied)
       newAttributes = []
     }
   };
 
+  /* function set the state based on the index of the current image 
+  to help change the side images */
   selectImage = (index) => {
     this.setState({ index: index });
   };
 
   render() {
+    // use params to add the current product id to the url
     let { id } = this.props.match.params;
     const { index } = this.state;
 
     return (
       <Container>
+        {/* Fetch the product and grab the it's id */}
         <Query query={PRODUCT_QUERY} variables={{ id: id }}>
           {({ loading, data, error }) => {
             if (loading) return <h1>Loading...</h1>;
             if (error) console.log(error);
 
             const { prices, gallery, name, brand, description, attributes } = data.product;
-            const currentProduct = data.product;
+            // use the all the properties to define the product
+            const currentProduct = data.product; 
 
             return (
               <Wrapper>
                 <SideImgContainer>
                   <SideWrapper>
+                    {/* Add click event to change the side image to the selected one */}
                     {
                       gallery.map((item, index) => (
                         <SideImage src={item} key={index} 
@@ -116,6 +138,8 @@ class ProductDetail extends Component {
                   <Brand>{brand}</Brand>
                   <Name>{name}</Name>
                   <AttributesContainer>
+                    {/* loop through product's array and pass as 
+                    props to attributes component */}
                     {data.product.attributes.map((item) => (
                       <Attributes
                         key={item.id}
@@ -127,6 +151,7 @@ class ProductDetail extends Component {
                     <PriceInfo>
                       <AttributePrice>PRICE: </AttributePrice>
                       <AttributePrice>
+                        {/* Get the current currency */}
                         {
                           prices[
                             parseInt(
@@ -142,18 +167,20 @@ class ProductDetail extends Component {
                       </AttributePrice>
                     </PriceInfo>
                   </AttributesContainer>
-                  {attributes !== [] ? (
-                    <Button 
+                  {
+                    /* Add click event to submit the current product to the 
+                    cart with a count property */
+                    attributes.length !== 0 ? 
+                    (<Button 
                     onClick={() => this.submitToCart({ ...currentProduct, count:1 })}>
                       ADD TO CART
-                    </Button>
-                  ) : (
-                    <Empty>
+                    </Button>) : 
+                    (<Empty>
                       Sorry! no attributes to select. Product already added to
                       cart
                       {console.log('attributes empty')}
-                    </Empty>
-                  )}
+                    </Empty>)
+                  }
                   <ProductDescription>
                     <div dangerouslySetInnerHTML={{ __html: description }} />
                   </ProductDescription>
@@ -167,4 +194,5 @@ class ProductDetail extends Component {
   }
 }
 
+/* connect this component to the state for access to data */ 
 export default connect((state) => ({currentCurrency: state.currency}),{ addToCart })(ProductDetail)

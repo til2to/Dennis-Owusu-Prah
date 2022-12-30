@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import MyBag from '../MyBag/MyBag'
-import onClickOutside from "react-onclickoutside";
 
 import {
   Wrapper,
@@ -14,12 +13,14 @@ class Overlay extends Component {
 
   constructor(props) {
     super(props);
+    /* State to check and hide the overlay on click of any area */ 
     this.state={
       visible: true,
     } 
   }
 
   render() {
+    /* Received props from navbar to hide modal on clicked of any area */ 
     const { hideOverlay } = this.props
 
     return (

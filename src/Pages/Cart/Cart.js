@@ -21,15 +21,15 @@ class Cart extends Component {
     let price_index = JSON.parse(window.localStorage.getItem('SelectedCurrency')) || 0
     let local_data = JSON.parse(window.localStorage.getItem('data'))
     let tax = 0.21 * cartTotal
-    
-    // cart.length === 0 ? cart[0] = 0 : cart[0] = cart[0]
-    console.log(cart[0])
+
     return (
       <Container>
         <Wrapper>
           <Title>
             <span>CART</span>
           </Title>
+          {/* A loop through the local storage or cart to 
+          pass each item to the cartItem component */}
           {
             quantity === 0
               ?
@@ -64,4 +64,5 @@ class Cart extends Component {
   }
 }
 
+// connect this component to the state for access to data
 export default connect((state) => ({ cartItems: state.cart, currentCurrency: state.currency }), null)(Cart)

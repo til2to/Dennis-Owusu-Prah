@@ -35,12 +35,14 @@ import {
 class CartItem extends Component {
   constructor(props) {
     super(props);
+    // state to hold current image if image of a product is more than one
     this.state = {
       imageIndex: 0,
     };
   }
   static propTypes = {}
 
+  // function to handle next and previous images
   handleNext = (imgIndex, gallery) => {
     imgIndex = imgIndex + 1;
     imgIndex < gallery.length && this.setState({imageIndex: imgIndex});
@@ -56,9 +58,16 @@ class CartItem extends Component {
   render() {
     const { noArrows } = this.props
     const { imageIndex } = this.state
+
+    // current product from Cart component/page
     let { name, brand, gallery, attributes, prices } = this.props.item
+    
     let updateLocalcount = JSON.parse(window.localStorage.getItem('data'))
 
+    /*
+    check the attributes of the current product against the existing products 
+    in the localStorage or cart to update the count of the current product
+    */ 
     let currentCount;
     updateLocalcount.forEach((localProduct) => {
       if (isEqual(attributes, localProduct.attributes)) {
@@ -83,6 +92,7 @@ class CartItem extends Component {
             </Price>
           </CartInfo>
           {
+            // A loop through the attributes of the current product to render
             attributes.map((item, index) => (
               <>
                 <AttributeName key={index}>
@@ -103,7 +113,9 @@ class CartItem extends Component {
             ))
           }
         </LeftContainer>
-  
+        
+        {/* adding addCount and subCount to increase/decrease 
+        the count of the current product */}
         <MidContainer>
           <AddCount onClick={() => this.props.addCount(attributes)} >
             <IncreaseIcon>
@@ -126,6 +138,7 @@ class CartItem extends Component {
               gallery.length !== 1 &&
               (
                 <>
+                {/* click event added to the "previous"/"next" buttons */}
                   <PrevNext direction="right" onClick={() => this.handleNext(imageIndex, gallery)}>
                     <Next src={nxt} />
                   </PrevNext>
@@ -142,5 +155,6 @@ class CartItem extends Component {
   }
 }
 
+// connect this component to the state for access to data and also dispatch actions
 export default connect((state) => ({ cartItems: state.cart.cart, currentCurrency: state.currency }),
   { addCount, subCount, })(CartItem)

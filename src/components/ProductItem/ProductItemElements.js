@@ -9,6 +9,7 @@ export const ProductSelector = styled.div`
   height: 52px;
   opacity: 0;
 `
+/* props to check items out of stock and disable pointers */ 
 export const Container = styled.div`
   pointer-events: ${props => props.instock === false ? 'none' : {}};
   opacity: ${props => props.instock === false ? '0.55' : {}};

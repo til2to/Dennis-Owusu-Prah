@@ -18,12 +18,14 @@ class CurrencySelector extends Component {
   static propTypes = {}
   constructor(props) {
     super(props);
+    // state to hold the current currency and the currency dropdown
     this.state = {
       defaultCurrency: JSON.parse(window.localStorage.getItem('SelectedCurrency')) || 0,
       open: false,
     }
   };
 
+  // clicking on all other areas on the app to close the currency dropdown
   container = React.createRef();
 
   componentDidMount() {
@@ -33,14 +35,7 @@ class CurrencySelector extends Component {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
 
-  currencyDropdown = () => {
-    this.setState((state) => {
-      return {
-        open: !state.open,
-      }
-    })
-  }
-
+  // function to close dropdown on the click of other areas
   handleClickOutside = (event) => {
     if (
       this.container.current &&
@@ -52,6 +47,17 @@ class CurrencySelector extends Component {
     }
   };
 
+  /* function to hide and show currency symbol */
+  currencyDropdown = () => {
+    this.setState((state) => {
+      return {
+        open: !state.open,
+      }
+    })
+  }
+
+  /* function to set the current currency based on the index
+    and also close the dropdown after selection. */
   setCurrency = (type) => {
     this.props.changeCurrency(type)
 
@@ -66,18 +72,24 @@ class CurrencySelector extends Component {
   render() {
     const { defaultCurrency, open } = this.state
 
+    // Get the currencies from local storage
     let currencies = JSON.parse(window.localStorage.getItem("Currency"))
+    // Get the currency length to help handle multi-lettered currencies.
     const indexLength = currencies[defaultCurrency]?.currency?.symbol?.length
 
     return (
       <Wrap>
+        {/* Render the currency symbol */}
         <CurrencySymbol index={defaultCurrency} indexLength={indexLength}>
           {currencies[defaultCurrency]?.currency?.symbol}
         </CurrencySymbol>
+
+        {/* Render the arrow toggleler infront of the currency symbol */}
         <ArrowContainer onClick={this.currencyDropdown}>
           <Arrow src={arrow} alt="Drop down" open={open}/>
         </ArrowContainer>
 
+        {/* Render the dropdown */}
         <Drop ref={this.container}>
           {
           open && 
@@ -93,4 +105,6 @@ class CurrencySelector extends Component {
   }
 }
 
+/* connect the changeCurrency action to this component to help 
+redux handle the currency changes */
 export default connect(null, { changeCurrency })(CurrencySelector)

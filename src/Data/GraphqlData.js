@@ -1,6 +1,7 @@
 import { gql } from 'graphql-tag'
 
-// data for products of all categories
+
+// Query for products(data) of all categories
 const ALLPRODUCT_QUERY = gql`
     query productQuery($title: String!){ 
         category(input: {title: $title}){
@@ -39,7 +40,7 @@ const ALLPRODUCT_QUERY = gql`
 export { ALLPRODUCT_QUERY }
 
 
-// Data for single product
+// Query for single product(data)
 const PRODUCT_QUERY = gql`
     query productQuery($id: String!){ 
         product(id: $id){
@@ -73,7 +74,7 @@ const PRODUCT_QUERY = gql`
 `
 export { PRODUCT_QUERY }
 
-
+// Query for the name(data) of each category
 const CATEGORIES_QUERY = gql`
     query categoriesQuery{ 
         categories{
@@ -83,7 +84,7 @@ const CATEGORIES_QUERY = gql`
 `
 export { CATEGORIES_QUERY }
 
-
+// Query for the price(data) of product
 const PRICE_QUERY = gql`
   query productQuery { 
     category {

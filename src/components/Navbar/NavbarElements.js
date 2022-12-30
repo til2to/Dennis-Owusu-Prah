@@ -89,5 +89,4 @@ export const MyBag_Bag = styled.div``;
 
 export const Symbol_Label = styled.div`
 `;
-
 export const ArrowContainer = styled.div``;

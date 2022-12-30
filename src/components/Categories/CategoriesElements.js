@@ -7,6 +7,7 @@ export const Container = styled.div`
 export const Wrap = styled.div`
  display: flex;  
 `
+// props used to handle the current category or tab
 export const Wrapper = styled.span`
   padding: 10px;
   max-width: 150px;
