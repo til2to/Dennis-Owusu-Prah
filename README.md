@@ -71,7 +71,7 @@
 
 - *Data is persistent even if the browser is closed*
 - *Built a customize drop down without the use of HTML "select" and "option" tag*
-- *Redux was used to ensure that change of state of the application is global without refreshing the browser*
+- *Redux was used to ensure that state changes is globally reflected instantly without refreshing the browser*
 - *There is a dynamic url which has the id for each product that is selected*
 - *Same product with different attributes selected is treated as new product using the unique products attributes selected*
 
