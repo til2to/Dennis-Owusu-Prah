@@ -30,12 +30,16 @@
 
 ## 📖 Ecommerce web app
 
-<h3><img src="featured-image.png" alt="ecommerce web app"/ height="200px"></h3>
+<div>
+  <h3><img src="featured-image.png" alt="ecommerce web app" height="200px"></h3>
+  <h3><img src="featuredImage.png" alt="ecommerce web app" height="200px"></h3>
+</div>
 
 * This ecommerce app is a web app for shopping. 
-* You can add products or remove products. 
-* Increase/decrease number of a particular selected product.
+* Add products or remove products. 
+* Increase/decrease count of a particular selected product.
 * Select various attributes (color, size etc) for each product.
+* Converts total amount of products to reflect the current currency. No Api
 
 ## 🛠 Built With <a name="built-with"></a>
 
