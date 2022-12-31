@@ -83,7 +83,7 @@
 
 > Link cooming soon.
 
-- [Live Demo Link](https://yourdeployedapplicationlink.com)
+- [Live Demo Link](#)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -141,6 +141,8 @@ You can deploy this project using:
 ## 👥 Authors <a name="authors"></a>
 
 👤 *Author1*
+
+Dennis Owusu Prah
 
 - GitHub: [@til2to](https://github.com/til2to)
 
@@ -206,4 +208,4 @@ If you like this project... thumbs up and please follow my github page
 
 ## 📝 License
 
-This project is [MIT](./LICENSE) licensed.
+This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
