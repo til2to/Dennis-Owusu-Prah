@@ -17,7 +17,6 @@ export const Container = styled.div`
   max-width: 370px;
   margin-bottom: 15px;
   position: relative;
-
   &:hover ${ProductSelector}{
     opacity: 1
   }
@@ -26,8 +25,9 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
+  margin-bottom: 20px;
   width: 310px;
-  height: 330px;
+  height: 310px;
 `
 export const ProductImage = styled.div`
   margin-bottom: 10px;
@@ -40,7 +40,7 @@ export const ProductImage = styled.div`
 `
 export const Gallery = styled.img`
   object-fit: none;
-  width: 300px;
+  width: 305px;
   height: 280px;
   position: relative;
 `

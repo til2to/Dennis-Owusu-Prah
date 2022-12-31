@@ -36,7 +36,7 @@ class App extends Component {
 
   // function to store the currencies from the api to the local storage
   async setCurrency (data) {
-    const res = await window.localStorage.setItem("Currency", JSON.stringify(data))
+    const res = window.localStorage.setItem("Currency", JSON.stringify(data))
   }
 
   render() {

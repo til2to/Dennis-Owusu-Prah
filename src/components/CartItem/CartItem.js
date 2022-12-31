@@ -6,6 +6,7 @@ import incIcon from '../../images/plus-square.png'
 import decIcon from '../../images/minus-square.png'
 import { addCount, subCount } from '../../actions/cartActions'
 import { connect } from 'react-redux';
+import uuid from 'react-uuid';
 
 import {
   Container,
@@ -61,13 +62,10 @@ class CartItem extends Component {
 
     // current product from Cart component/page
     let { name, brand, gallery, attributes, prices } = this.props.item
-    
     let updateLocalcount = JSON.parse(window.localStorage.getItem('data'))
 
-    /*
-    check the attributes of the current product against the existing products 
-    in the localStorage or cart to update the count of the current product
-    */ 
+    /* check the attributes of the current product against the existing products 
+    in the localStorage or cart to update the count of the current product */ 
     let currentCount;
     updateLocalcount.forEach((localProduct) => {
       if (isEqual(attributes, localProduct.attributes)) {
@@ -93,24 +91,24 @@ class CartItem extends Component {
           </CartInfo>
           {
             // A loop through the attributes of the current product to render
-            attributes.map((item, index) => (
-              <>
-                <AttributeName key={index}>
+            attributes.map((item, index) => {
+              return <>
+                <AttributeName key={uuid()}>
                   {item.name}: 
                 </AttributeName>
               
-                <AttributesItems key={item.color}>
+                <AttributesItems key={uuid()}>
                   {
                     item.name === 'Color' ?
-                    <ColorContainer key={item.id} 
+                    <ColorContainer key={uuid()} 
                     style={{ backgroundColor: item.value, border: "1px solid #1d1f22" }}
                     />
                     :
-                    <AttributesCont>{item.value}</AttributesCont>
+                    <AttributesCont key={uuid()}>{item.value}</AttributesCont>
                   }
                 </AttributesItems>
               </>
-            ))
+            })
           }
         </LeftContainer>
         
@@ -138,11 +136,16 @@ class CartItem extends Component {
               gallery.length !== 1 &&
               (
                 <>
-                {/* click event added to the "previous"/"next" buttons */}
-                  <PrevNext direction="right" onClick={() => this.handleNext(imageIndex, gallery)}>
+                {/* add click event to the "previous"/"next" buttons */}
+                  <PrevNext direction="right" 
+                  onClick={() => this.handleNext(imageIndex, gallery)}
+                  >
                     <Next src={nxt} />
                   </PrevNext>
-                  <PrevNext direction="left" onClick={() => this.handlePrevious(imageIndex)}>
+
+                  <PrevNext direction="left" 
+                  onClick={() => this.handlePrevious(imageIndex)}
+                  >
                     <Previous src={prev} />
                   </PrevNext>
                 </>
@@ -156,5 +159,5 @@ class CartItem extends Component {
 }
 
 // connect this component to the state for access to data and also dispatch actions
-export default connect((state) => ({ cartItems: state.cart.cart, currentCurrency: state.currency }),
+export default connect((state) => ({ currentCurrency: state.currency }),
   { addCount, subCount, })(CartItem)

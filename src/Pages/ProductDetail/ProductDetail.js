@@ -180,7 +180,6 @@ class ProductDetail extends Component {
                     (<Empty>
                       Sorry! no attributes to select. Product already added to
                       cart
-                      {console.log('attributes empty')}
                     </Empty>)
                   }
                   <ProductDescription>

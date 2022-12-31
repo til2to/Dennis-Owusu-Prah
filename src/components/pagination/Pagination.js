@@ -12,6 +12,7 @@ class Pagination extends Component {
     super(props);
     this.state = {
       activePage: 1,
+      isActive: false,
     }
   }
 
@@ -21,14 +22,13 @@ class Pagination extends Component {
   }
 
   render() {
-    const { productsPerPage, totalProducts, changePage } = this.props
-    const { activePage } = this.state;
+    const { productsPerPage, changePage, totalProducts } = this.props
+    const { activePage, isActive } = this.state;
     const pageNumbers = []
 
-    for (let i=1; i<=Math.ceil(totalProducts/productsPerPage); i++){
+    for (let i=1; i<=Math.ceil(totalProducts/productsPerPage); i++) {
       pageNumbers.push(i)
     }
-    console.log(activePage)
 
     return (
       <Wrapper>
@@ -46,5 +46,4 @@ class Pagination extends Component {
     )
   }
 }
-
 export default Pagination

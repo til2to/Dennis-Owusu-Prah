@@ -36,7 +36,7 @@ class Categories extends Component {
           ({ data, loading, error }) => {
             if (loading) return <h3>loading in categories</h3>
             if (error) console.log(error.message)
-
+            
             // store categories
             const categoryArr = []
             data.categories.forEach((category) => {
@@ -47,15 +47,15 @@ class Categories extends Component {
             return <Wrap>
               {
                 categoryArr.map((category, index) => {
-                  return <>
-                    <StyledLink to={`/products/${category}`}>
+                  return (
+                    <StyledLink to={`/products/${category}`} key={index}>
                       <Wrapper key={index} indexVal={index} stateVal={activeIndex} 
                       onClick={() => this.handleActive(index)}
                       > 
                         {category.toUpperCase()} 
                       </Wrapper>
                     </StyledLink>
-                  </>
+                  )
                 })
               }
             </Wrap>

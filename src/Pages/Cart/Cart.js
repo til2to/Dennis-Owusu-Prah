@@ -22,7 +22,6 @@ class Cart extends Component {
     let local_data = JSON.parse(window.localStorage.getItem('data'))
     let tax = 0.21 * cartTotal
 
-    console.log(local_data)
     return (
       <Container>
         <Wrapper>

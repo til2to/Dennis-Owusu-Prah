@@ -27,8 +27,6 @@ class Attributes extends Component {
     // Incoming data as props from Product Detail component/Page
     const { item: { name, type, items }, handleClick, selectedAttributes } = this.props
 
-    console.log(selectedAttributes)
-    console.log(items)
     return (
       <Container>
         <Wrapper>
@@ -36,37 +34,7 @@ class Attributes extends Component {
           <AttributesContainer>
             {/* Render attributes of products based on text or color code */}
             {
-              // type === 'swatch'
-              //   ?
-              //   items.map((color, id) => (
-              //     <ColorContainer key={color.id} color={color} onClick={() => handleClick(name, color.value)} 
-              //       isActive={selectedAttributes.hasOwnProperty(name) && selectedAttributes[name] === color.value ? true : false} />
-              //   ) )
-              //   :
-              //   items.map((text, index) => (
-              //     <AttTextContainer key={index} onClick={() => handleClick(name, text.value)}
-              //       isActive={selectedAttributes.hasOwnProperty(name) && selectedAttributes[name] === text.value ? true : false}
-              //     >
-              //       {text.value}
-              //     </AttTextContainer>
-              //   ))
-
-              items.map((item, index) => {
-              //   return <>
-              //     {type === 'swatch' ? 
-              //     (<ColorContainer key={this.generateKey()} color={item.value} onClick={() => handleClick(name, item.value)} 
-              //     isActive={selectedAttributes.hasOwnProperty(name) && 
-              //     selectedAttributes[name] === item.value ? true : false} 
-              //     />):
-              //     (<AttTextContainer key={index} onClick={() => handleClick(name, item.value)}
-              //     isActive={selectedAttributes.hasOwnProperty(name) && 
-              //     selectedAttributes[name] === item.value ? true : false}
-              //     >
-              //       {item.value}
-              //     </AttTextContainer>)
-              //   }
-              // </>
-
+             items.map((item, index) => {
                 if(type === "swatch"){
                   return (
                     <ColorContainer key={this.generateKey()} color={item.value} 
@@ -77,7 +45,6 @@ class Attributes extends Component {
                   )
                 }
                 if(type === "text"){
-                  console.log(item.value)
                   return (
                     <AttTextContainer key={this.generateKey()} text={item.value}
                     onClick={() => handleClick(name, item.value)}

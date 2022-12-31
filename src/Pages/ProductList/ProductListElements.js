@@ -8,10 +8,22 @@ export const Container = styled.div`
 export const CategoryName = styled.div`
   font-weight: 250;
   font-size: 25px;
-  margin: 45px 0 100px 1%;
+  margin: 3% 0 5% 1%;
+  overflow-y: hidden;
+  z-index: 1;
+`
+export const PaginationContainer = styled.div`
+  position: relative;
+  bottome: 0;
 `
 export const Wrap = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: 50px 0;
+  ${PaginationContainer} {
+    flex-basis: 100%;
+    position: fixed;
+    top: 13%;
+    right: 10%;
+  };
+  margin: 40px 0;
 `

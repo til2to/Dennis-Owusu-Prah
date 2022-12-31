@@ -4,10 +4,10 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   display: flex;
   position: absolute;
-  bottom: 5%;
+  z-index: 1;
 `
 export const PageWrap = styled.div`
-  min-width: 20px;
+  min-width: 25px;
   min-height: 20px;
   margin: 2px;
   font-size: 20px;

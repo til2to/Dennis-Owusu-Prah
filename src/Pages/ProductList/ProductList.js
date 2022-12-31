@@ -10,6 +10,7 @@ import {
   Container,
   CategoryName,
   Wrap,
+  PaginationContainer,
 } from './ProductListElements'
 
 class ProductList extends Component {
@@ -17,7 +18,8 @@ class ProductList extends Component {
     super(props)
     this.state = {
       currentPage: 1,
-      productsPerPage: 4,
+      productsPerPage: 5,
+      categoryNumber: 0,
     }
   }
 
@@ -29,7 +31,7 @@ class ProductList extends Component {
   render() {
     let { name } = this.props.match.params
     const { productsSize } = this.props
-    const { currentPage, productsPerPage } = this.state;
+    const { currentPage, productsPerPage, categoryNumber } = this.state;
     const indexOfLastPost = currentPage * productsPerPage;
     const indexOfFirstPost = indexOfLastPost - productsPerPage;
     
@@ -39,19 +41,19 @@ class ProductList extends Component {
     }
 
     return (
-      <Container>
+       <Container>
         <CategoryName>
           Category {name}
         </CategoryName>
 
         {/* Fetch data from graphql endpoint 
         and pass to product item as props */}
-        <Query query={ALLPRODUCT_QUERY} variables={{ title: name }}>
+        <Query query={ALLPRODUCT_QUERY} variables={{ title: name }} >
           {
             ({ data, loading, error }) => {
               if (loading) return <span> Loading...</span>
               if (error) console.log(error.message)
-              
+
               let totalProducts = data.category.products.length
               this.setTotalProducts(totalProducts) /* dispatch total products */
 
@@ -61,24 +63,25 @@ class ProductList extends Component {
 
               return <Wrap>
                 {
-                  currentData.map((prod, index) => {
-                    return <ProductItem key={index} prod={prod} />
-                  })
+                  currentData.map((prod, index) =>
+                    <ProductItem key={index} prod={prod} />
+                  )
                 }
+
+                {/* Render pagination */}
+                <PaginationContainer>
+                  <Pagination productsPerPage={productsPerPage} 
+                  totalProducts={totalProducts} changePage={changePage}
+                  />
+                </PaginationContainer>
               </Wrap>
             }
           }
         </Query>
-
-        {/* Render pagination */}
-        <Pagination productsPerPage={productsPerPage} 
-          totalProducts={productsSize} changePage={changePage}
-        />
       </Container>
     )
   }
 }
 
 /* Connect this component to the state */
-export default connect((state) => ({ productsSize: state.pagination }),
- { productsLength, })(ProductList)
+export default connect(null, { productsLength, })(ProductList)
