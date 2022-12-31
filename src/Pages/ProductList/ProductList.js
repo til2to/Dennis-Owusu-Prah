@@ -28,7 +28,7 @@ class ProductList extends Component {
 
   render() {
     let { name } = this.props.match.params
-    const { productsTotal } = this.props
+    const { productsSize } = this.props
     const { currentPage, productsPerPage } = this.state;
     const indexOfLastPost = currentPage * productsPerPage;
     const indexOfFirstPost = indexOfLastPost - productsPerPage;
@@ -72,7 +72,7 @@ class ProductList extends Component {
 
         {/* Render pagination */}
         <Pagination productsPerPage={productsPerPage} 
-          totalProducts={productsTotal} changePage={changePage}
+          totalProducts={productsSize} changePage={changePage}
         />
       </Container>
     )
@@ -80,5 +80,5 @@ class ProductList extends Component {
 }
 
 /* Connect this component to the state */
-export default connect((state) => ({ productsTotal: state.pagination }),
+export default connect((state) => ({ productsSize: state.pagination }),
  { productsLength, })(ProductList)
