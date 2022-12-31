@@ -24,3 +24,6 @@ export const PageNumber = styled.a`
   text-decoration: none;
   font-weight: bold;
 `
+export const PageTitle = styled.div`
+  font-size: 15px
+`

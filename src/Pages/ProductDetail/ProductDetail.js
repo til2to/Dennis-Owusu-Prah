@@ -123,14 +123,8 @@ class ProductDetail extends Component {
               <Wrapper>
                 <SideImgContainer>
                   <SideWrapper>
-                    {/* Add click event to change the side image to the selected one */}
-                    {
-                      gallery.map((item, index) => (
-                        <SideImage src={item} key={index} 
-                        onClick={()=>this.selectImage(index)}
-                        />
-                      ))
-                    }
+                    {<SideImage tab={this.selectImage} 
+                    gallery={gallery}/>}
                   </SideWrapper>
                 </SideImgContainer>
                 <ProductImg>

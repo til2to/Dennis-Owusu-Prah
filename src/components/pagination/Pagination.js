@@ -4,6 +4,7 @@ import {
   Wrapper,
   PageWrap,
   PageNumber,
+  PageTitle,
 } from './paginationElements'
 
 
@@ -32,6 +33,7 @@ class Pagination extends Component {
 
     return (
       <Wrapper>
+        <PageTitle>Page</PageTitle>
         {pageNumbers.map(number => (
           <PageWrap key={number} stateVal={activePage}
           indexVal={number}
