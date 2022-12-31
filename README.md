@@ -83,7 +83,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-> Add a link to your deployed project.
+> Link cooming soon.
 
 - [Live Demo Link](https://yourdeployedapplicationlink.com)
 
@@ -117,9 +117,11 @@ sh
 
 Clone this repository to your desired folder:
 
-sh
-  cd your-local-folder
-  git clone git@github.com:myaccount/my-project.git
+- cd your-local-folder
+- clone this repository into your local directory
+- open the project in your favorite code editor
+- Install node packages 
+- run npm start to preview in your local browser
 
 
 ### Install
