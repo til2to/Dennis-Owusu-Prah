@@ -3,8 +3,9 @@ import { CHANGE_CURRENCY } from '../Types';
 
 /* get the current currency and store */ 
 let currency = JSON.parse(window.localStorage.getItem('SelectedCurrency'));
+
 const initialState = {
-  currentCurrency: currency
+  currentCurrency: currency,
 };
 
 export const currencyReducer = (state = initialState, action) => {
@@ -32,6 +33,7 @@ export const currencyReducer = (state = initialState, action) => {
       );
       /* reset the current total to the local storage */ 
       window.localStorage.setItem('total', JSON.stringify(sum))
+    
       return currency
 
     default:

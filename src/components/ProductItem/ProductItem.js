@@ -26,10 +26,8 @@ class ProductItem extends Component {
   static propTypes = {}
 
   render() {
-    /* 
-    Received props from productList page,
-    for the sending of a product at a time to the cart in the store
-    */ 
+    /* Received props from productList page,
+    for the sending of a product at a time to the cart in the store */ 
     const { name, brand, gallery, id, prices, inStock, attributes} = this.props.prod;
     let currentProduct = this.props.prod
 

@@ -1,4 +1,4 @@
-import { CHANGE_CURRENCY } from '../Types';
+import { CHANGE_CURRENCY, } from '../Types';
 
 
 export const changeCurrency = (currentCurrency) => ({

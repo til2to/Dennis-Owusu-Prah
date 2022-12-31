@@ -8,7 +8,7 @@ export const Container = styled.div`
 export const Wrap = styled.div`
  display: flex;  
 `
-// props used to handle the current category or tab
+// props to handle the current category or tab
 export const Wrapper = styled.span`
   padding: 10px;
   max-width: 150px;
@@ -16,7 +16,7 @@ export const Wrapper = styled.span`
   padding-bottom: 20px;
   border-bottom: ${props => props.indexVal == props.stateVal ? 
     '1px solid #5ece7b' : {}
-  } 
+  }
 `
 export const StyledLink = styled(Link)`
   text-decoration: none;
