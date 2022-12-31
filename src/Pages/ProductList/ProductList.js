@@ -30,8 +30,7 @@ class ProductList extends Component {
 
   render() {
     let { name } = this.props.match.params
-    const { productsSize } = this.props
-    const { currentPage, productsPerPage, categoryNumber } = this.state;
+    const { currentPage, productsPerPage, } = this.state;
     const indexOfLastPost = currentPage * productsPerPage;
     const indexOfFirstPost = indexOfLastPost - productsPerPage;
     

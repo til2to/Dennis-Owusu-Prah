@@ -30,7 +30,7 @@
 
 ## 📖 Ecommerce web app
 
-<h3><img src="" alt="ecommerce web app"/></h3>
+<h3><img src="featured-image.png" alt="ecommerce web app"/ height="200px"></h3>
 
 * This ecommerce app is a web app for shopping. 
 * You can add products or remove products. 

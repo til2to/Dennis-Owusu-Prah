@@ -123,8 +123,7 @@ class ProductDetail extends Component {
               <Wrapper>
                 <SideImgContainer>
                   <SideWrapper>
-                    {<SideImage tab={this.selectImage} 
-                    gallery={gallery}/>}
+                  <SideList gallery={gallery} tab={this.selectImage} />
                   </SideWrapper>
                 </SideImgContainer>
                 <ProductImg>
