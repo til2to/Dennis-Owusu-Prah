@@ -39,11 +39,9 @@
 
 ## 🛠 Built With <a name="built-with"></a>
 
-* Project built with React class component. No functional component used.
+* Project was built with React class component. No functional component used.
 
 ### Tech Stack <a name="tech-stack"></a>
-
-> Describe the tech stack and include only the relevant sections that apply to your project.
 
 <details>
   <summary>Client</summary>
@@ -73,9 +71,9 @@
 
 > Describe between 1-3 key features of the application.
 
-- *Local Storage was used to make the data persistent even if the browser is closed*
+- *Data is persistent even if the browser is closed*
 - *Built a customize drop down without the use of HTML "select" and "option" tag*
-- *Redux was used to ensure that all parts of the application updates instantly without refreshing the browser when a currency is changed*
+- *Redux was used to ensure that change of state of the application is global without refreshing the browser*
 - *There is a dynamic url which has the id for each product that is selected*
 - *Same product with different attributes selected is treated as new product using the unique products attributes selected*
 
@@ -155,8 +153,8 @@ You can deploy this project using:
 ## 🔭 Future Features <a name="future-features"></a>
 
 - [ ] *Add postgresql database*
-- [ ] *Add payment*
-- [ ] *Currently working to deploy it.*
+- [ ] *Add payment methods*
+- [ ] *Currently working to deploy it*
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
