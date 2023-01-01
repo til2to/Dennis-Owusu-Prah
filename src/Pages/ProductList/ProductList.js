@@ -18,7 +18,7 @@ class ProductList extends Component {
     super(props)
     this.state = {
       currentPage: 1,
-      productsPerPage: 4,
+      productsPerPage: 8,
       categoryNumber: 0,
     }
   }
