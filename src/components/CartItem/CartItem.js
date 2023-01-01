@@ -6,7 +6,6 @@ import incIcon from '../../images/plus-square.png'
 import decIcon from '../../images/minus-square.png'
 import { addCount, subCount } from '../../actions/cartActions'
 import { connect } from 'react-redux';
-import uuid from 'react-uuid';
 
 import {
   Container,
@@ -93,18 +92,18 @@ class CartItem extends Component {
             // A loop through the attributes of the current product to render
             attributes.map((item, index) => {
               return <>
-                <AttributeName key={uuid()}>
+                <AttributeName key={index}>
                   {item.name}: 
                 </AttributeName>
               
-                <AttributesItems key={uuid()}>
+                <AttributesItems key={index}>
                   {
                     item.name === 'Color' ?
-                    <ColorContainer key={uuid()} 
+                    <ColorContainer key={index} 
                     style={{ backgroundColor: item.value, border: "1px solid #1d1f22" }}
                     />
                     :
-                    <AttributesCont key={uuid()}>{item.value}</AttributesCont>
+                    <AttributesCont key={index}>{item.value}</AttributesCont>
                   }
                 </AttributesItems>
               </>
