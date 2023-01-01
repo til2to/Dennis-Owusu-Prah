@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import CartItem from '../CartItem/CartItem';
 import {
   Container,
@@ -12,7 +12,7 @@ import {
   ButtonsContainer,
   StyledLink,
   Button,
-  ButtonCheckout
+  ButtonCheckout,
 } from './MyBagElements';
 
 

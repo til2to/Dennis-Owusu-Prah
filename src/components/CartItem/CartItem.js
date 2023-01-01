@@ -159,5 +159,5 @@ class CartItem extends Component {
 }
 
 // connect this component to the state for access to data and also dispatch actions
-export default connect((state) => ({ currentCurrency: state.currency }),
+export default connect((state) => ({ currentCurrency: state.currency, cartItems: state.cart }),
   { addCount, subCount, })(CartItem)
