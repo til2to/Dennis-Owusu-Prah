@@ -24,14 +24,18 @@ class App extends Component {
     /* state to hold to get and hold the currencies from local storage */ 
     this.state = {
       currency: window.localStorage.getItem("Currency") || [],
-      // selectedCurrency: window.localStorage.getItem("SelectedCurrency"),
+      selectedCurrency: window.localStorage.getItem("SelectedCurrency"),
     };
   }
 
   async componentDidMount() {
-    // const { selectedCurrency } = this.state
+    const { selectedCurrency } = this.state
     // set the currency to first currency whenever there's is undefined
-    // if(selectedCurrency === null) window.localStorage.setItem("SelectedCurrency", 0);
+    
+    if(selectedCurrency === null) {
+      window.localStorage.setItem("SelectedCurrency", 0)
+    }
+    // else JSON.parse(window.localStorage.getItem('SelectedCurrency'))
   }
 
   // function to store the currencies from the api to the local storage
@@ -41,19 +45,24 @@ class App extends Component {
 
   render() {
     const { currency } = this.state
+    const setCurrency = (data) => {
+      const res = window.localStorage.setItem("Currency", JSON.stringify(data))
+    }
 
     return (
       <>
       {/* fetch currencies from api */}
         {
-          currency && (
+          (
             <Query query={PRICE_QUERY}>
               {({ data, loading, error }) => {
                 if (loading) return <h1>loading</h1>
                 if (error) return <h1>{error.message}</h1>;
-
+                
                 {/* set currencies of first product to the local storage at once */} 
-                this.setCurrency(data?.category?.products[0]?.prices);
+                if(!currency || currency.length === 0){
+                this.setCurrency(data?.category?.products[0]?.prices)
+                }
               }}
             </Query>
           )

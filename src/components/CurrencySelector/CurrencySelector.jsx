@@ -28,7 +28,7 @@ class CurrencySelector extends Component {
   // clicking on all other areas on the app to close the currency dropdown
   container = React.createRef();
   componentDidMount() {
-    // window.localStorage.setItem("SelectedCurrency", 0);
+    // JSON.parse(window.localStorage.getItem('SelectedCurrency')) 
     document.addEventListener("mousedown", this.handleClickOutside);
   }
   componentWillUnmount() {
@@ -71,12 +71,19 @@ class CurrencySelector extends Component {
 
   render() {
     const { defaultCurrency, open } = this.state
-
-    // Get the currencies from local storage
     let currencies = JSON.parse(window.localStorage.getItem("Currency"))
 
+    // Get the currencies from local storage
+    if(currencies === null || currencies === [] || currencies.length === 0) {
+      currencies = []
+    }
+    
+    if (!localStorage.SelectedCurrency) {
+      localStorage.SelectedCurrency = 0;
+      JSON.parse(window.localStorage.getItem('SelectCurrency'))
+    }
     // Get the currency length to help handle multi-lettered currencies.
-    const indexLength = currencies[defaultCurrency]?.currency?.symbol?.length || 0;
+    const indexLength = currencies[defaultCurrency]?.currency?.symbol?.length;
 
     return (
       <Wrap>
