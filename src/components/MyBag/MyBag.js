@@ -51,7 +51,7 @@ class MyBag extends Component {
               </Amount>
               : 
               <Amount>
-                {parseFloat(cartTotal).toFixed(2)}
+               { 0 }
               </Amount>
             }
           </Total>

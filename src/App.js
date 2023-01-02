@@ -24,14 +24,14 @@ class App extends Component {
     /* state to hold to get and hold the currencies from local storage */ 
     this.state = {
       currency: window.localStorage.getItem("Currency") || [],
-      selectedCurrency: window.localStorage.getItem("SelectedCurrency"),
+      // selectedCurrency: window.localStorage.getItem("SelectedCurrency"),
     };
   }
 
   async componentDidMount() {
-    const { selectedCurrency } = this.state
+    // const { selectedCurrency } = this.state
     // set the currency to first currency whenever there's is undefined
-    if(selectedCurrency === null) window.localStorage.setItem("SelectedCurrency", "0");
+    // if(selectedCurrency === null) window.localStorage.setItem("SelectedCurrency", 0);
   }
 
   // function to store the currencies from the api to the local storage
@@ -51,6 +51,7 @@ class App extends Component {
               {({ data, loading, error }) => {
                 if (loading) return <h1>loading</h1>
                 if (error) return <h1>{error.message}</h1>;
+
                 {/* set currencies of first product to the local storage at once */} 
                 this.setCurrency(data?.category?.products[0]?.prices);
               }}
