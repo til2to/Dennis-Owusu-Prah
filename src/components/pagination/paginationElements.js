@@ -11,7 +11,7 @@ export const PageWrap = styled.div`
   min-height: 20px;
   margin: 2px;
   font-size: 20px;
-  border-bottom: ${props => props.indexVal == props.stateVal ? 
+  border-bottom: ${props => props.indexVal === props.stateVal ? 
     '3px solid #5ece7b' : {}
   }
 `

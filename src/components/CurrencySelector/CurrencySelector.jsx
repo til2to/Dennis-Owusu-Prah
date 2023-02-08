@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import arrow from "../../images/arrow.svg";
 import { connect } from "react-redux";
@@ -15,7 +14,6 @@ import {
 
 
 class CurrencySelector extends Component {
-  static propTypes = {}
   constructor(props) {
     super(props);
     // state to hold the current currency and the currency dropdown

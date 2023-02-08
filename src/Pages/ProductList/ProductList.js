@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from "prop-types";
 import { Query } from 'react-apollo'
 import { connect } from 'react-redux'
-import Pagination from '../../components/pagination/Pagination'
 import ProductItem from '../../components/ProductItem/ProductItem'
 import { ALLPRODUCT_QUERY } from '../../Data/GraphqlData';
 import { productsLength } from "../../actions/paginationActions";
@@ -10,10 +10,10 @@ import {
   Container,
   CategoryName,
   Wrap,
-  PaginationContainer,
 } from './ProductListElements'
 
 class ProductList extends Component {
+  
   constructor(props) {
     super(props)
     this.state = {
@@ -33,11 +33,10 @@ class ProductList extends Component {
     const { currentPage, productsPerPage, } = this.state;
     const indexOfLastPost = currentPage * productsPerPage;
     const indexOfFirstPost = indexOfLastPost - productsPerPage;
-    
     /* Change page */
-    const changePage = pageNumber => {
-      this.setState({currentPage: pageNumber})
-    }
+    // const changePage = pageNumber => {
+    //   this.setState({currentPage: pageNumber})
+    // }
 
     return (
        <Container>
@@ -66,13 +65,6 @@ class ProductList extends Component {
                     <ProductItem key={index} prod={prod} />
                   )
                 }
-
-                {/* Render pagination */}
-                <PaginationContainer>
-                  <Pagination productsPerPage={productsPerPage} 
-                  totalProducts={totalProducts} changePage={changePage}
-                  />
-                </PaginationContainer>
               </Wrap>
             }
           }
@@ -82,5 +74,14 @@ class ProductList extends Component {
   }
 }
 
+ProductList.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      name: PropTypes.string
+    })
+  }),
+  productsLength: PropTypes.func,
+}
+
 /* Connect this component to the state */
-export default connect(null, { productsLength, })(ProductList)
+export default connect(null, { productsLength, })(ProductList);

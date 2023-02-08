@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
 import {
   Container,
@@ -12,21 +12,11 @@ import {
 
 
 class Attributes extends Component {
-  constructor(props){
-    super(props)
-    this.keyCount = 0;
-    this.getKey = this.generateKey.bind(this);
-  }
   static propTypes = {}
-  
-  generateKey(){
-    return this.keyCount++;
-  }
 
   render() {
     // Incoming data as props from Product Detail component/Page
     const { item: { name, type, items }, handleClick, selectedAttributes } = this.props
-
     return (
       <Container>
         <Wrapper>
@@ -37,18 +27,18 @@ class Attributes extends Component {
              items.map((item, index) => {
                 if(type === "swatch"){
                   return (
-                    <ColorContainer key={this.generateKey()} color={item.value} 
+                    <ColorContainer key={`color${index}`} color={item.value} 
                     onClick={() => handleClick(name, item.value)} 
-                    isActive={selectedAttributes.hasOwnProperty(name) && 
+                    isActive={Object.prototype.hasOwnProperty.call(selectedAttributes, name) && 
                     selectedAttributes[name] === item.value ? true : false} 
                     />
                   )
                 }
                 if(type === "text"){
                   return (
-                    <AttTextContainer key={this.generateKey()} text={item.value}
+                    <AttTextContainer key={`text${index}`} text={item.value}
                     onClick={() => handleClick(name, item.value)}
-                    isActive={selectedAttributes.hasOwnProperty(name) && 
+                    isActive={Object.prototype.hasOwnProperty.call(selectedAttributes, name) && 
                     selectedAttributes[name] === item.value ? true : false}
                     >
                       {item.value}
@@ -63,6 +53,17 @@ class Attributes extends Component {
       </Container>
     )
   }
+}
+
+Attributes.propTypes = {
+  noArrows: PropTypes.bool,
+  item: PropTypes.shape({
+    name: PropTypes.string,
+    type: PropTypes.string,
+    items: PropTypes.array
+  }),
+  handleClick: PropTypes.func,
+  selectedAttributes: PropTypes.object
 }
 
 export default Attributes

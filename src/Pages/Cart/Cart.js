@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
+import PropTypes from "prop-types";
 import CartItem from '../../components/CartItem/CartItem';
 
 import {
@@ -64,5 +64,14 @@ class Cart extends Component {
   }
 }
 
+Cart.propTypes = {
+  cartItems: PropTypes.shape({
+    cart: PropTypes.array,
+    quantity: PropTypes.number,
+  },),
+  addCount: PropTypes.func
+}
+
 // connect this component to the state for access to data
-export default connect((state) => ({ cartItems: state.cart, currentCurrency: state.currency }), null)(Cart)
+export default connect((state) => ({ cartItems: state.cart, currentCurrency: state.currency }), null)(Cart);
+

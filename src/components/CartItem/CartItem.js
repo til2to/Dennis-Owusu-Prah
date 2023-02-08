@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import prev from '../../images/prev.png'
 import nxt from '../../images/nxt.png'
 import incIcon from '../../images/plus-square.png'
 import decIcon from '../../images/minus-square.png'
 import { addCount, subCount } from '../../actions/cartActions'
 import { connect } from 'react-redux';
+import PropTypes from "prop-types";
 
 import {
   Container,
@@ -28,7 +28,8 @@ import {
   AddCount,
   SubCount,
   Count,
-  IncreaseIcon
+  IncreaseIcon,
+  Wrapper
 } from './CartItemElements'
 
 
@@ -40,7 +41,6 @@ class CartItem extends Component {
       imageIndex: 0,
     };
   }
-  static propTypes = {}
 
   // function to handle next and previous images
   handleNext = (imgIndex, gallery) => {
@@ -58,7 +58,7 @@ class CartItem extends Component {
   render() {
     const { noArrows } = this.props
     const { imageIndex } = this.state
-
+    
     // current product from Cart component/page
     let { name, brand, gallery, attributes, prices } = this.props.item
     let updateLocalcount = JSON.parse(window.localStorage.getItem('data'))
@@ -90,24 +90,23 @@ class CartItem extends Component {
           </CartInfo>
           {
             // A loop through the attributes of the current product to render
-            attributes.map((item, index) => {
-              return <>
-                <AttributeName key={index}>
+            attributes.map((item, index) => <Wrapper key={`parent${index}`}>
+                <AttributeName key={`name${index}`}>
                   {item.name}: 
                 </AttributeName>
               
-                <AttributesItems key={index}>
+                <AttributesItems key={`item${index}`}>
                   {
                     item.name === 'Color' ?
-                    <ColorContainer key={index} 
+                    <ColorContainer key={`color${index}`} 
                     style={{ backgroundColor: item.value, border: "1px solid #1d1f22" }}
                     />
                     :
-                    <AttributesCont key={index}>{item.value}</AttributesCont>
+                    <AttributesCont key={`container${index}`}>{item.value}</AttributesCont>
                   }
                 </AttributesItems>
-              </>
-            })
+              </Wrapper>
+            )
           }
         </LeftContainer>
         
@@ -155,6 +154,19 @@ class CartItem extends Component {
       </Container>
     )
   }
+}
+
+CartItem.propTypes = {
+  noArrows: PropTypes.bool,
+  item: PropTypes.shape({
+    name: PropTypes.string,
+    brand: PropTypes.string,
+    gallery: PropTypes.array,
+    attributes: PropTypes.array,
+    prices: PropTypes.array
+  }),
+  addCount: PropTypes.func,
+  subCount: PropTypes.func
 }
 
 // connect this component to the state for access to data and also dispatch actions

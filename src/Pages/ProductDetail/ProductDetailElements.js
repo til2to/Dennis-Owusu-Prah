@@ -76,20 +76,13 @@ export const Button = styled.div`
   margin-bottom: 10px;
   align-items: center;
 `;
-export const ProductDescription = styled.div`
+export const ProductDescription = styled.p`
   font-family: 'Roboto', sans-serif;
   width: 256px;
   display: flex;
   flex-wrap: wrap;
   font-size: 16px;
   margin-top: 5px;
-`;
-export const SideImgContainer = styled.div`
-  margin-left: 20px;
-  margin-top: 100px;
-
-  display: flex;
-  justify-content: flex-end;
 `;
 export const SideWrapper = styled.div`
   margin-left: 20px;
@@ -113,4 +106,4 @@ export const SideImage = styled.img`
   flex-direction: column;
   margin-bottom: 5px;
   cursor: pointer;
-`
+`;

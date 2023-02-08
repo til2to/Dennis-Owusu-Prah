@@ -1,12 +1,9 @@
 import styled from 'styled-components'
 
-
 export const Container = styled.div`
-  display: flex;
   justify-content: flex-end;
-`
-export const Wrapper = styled.div`
-  margin-left: 20px;
+  max-height: ${props => props.count > 3 ? '280px' : {}};
+  overflow-y: ${props => props.count > 3 ? 'scroll' : {}};
 `
 export const SideImage = styled.img`
   width: 130px;
@@ -16,4 +13,4 @@ export const SideImage = styled.img`
   flex-direction: column;
   margin-bottom: 5px;
   cursor: pointer;
-`
+`;

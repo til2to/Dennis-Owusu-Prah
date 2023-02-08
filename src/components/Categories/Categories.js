@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 import { CATEGORIES_QUERY } from '../../Data/GraphqlData'
 
@@ -11,7 +10,6 @@ import {
 
 
 class Categories extends Component {
-  static propTypes = {}
 
   constructor(props){
     super(props)
@@ -52,7 +50,7 @@ class Categories extends Component {
                       <Wrapper key={index} indexVal={index} stateVal={activeIndex} 
                       onClick={() => this.handleActive(index)}
                       > 
-                        {category.toUpperCase()} 
+                        {category.toUpperCase()}
                       </Wrapper>
                     </StyledLink>
                   )

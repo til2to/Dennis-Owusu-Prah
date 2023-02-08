@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { Query } from "react-apollo";
 import Attributes from "../../components/Attributes/Attributes";
 import SideList from "../../components/SideList/SideList";
 import { PRODUCT_QUERY } from "../../Data/GraphqlData";
 import { connect } from "react-redux";
 import { addToCart, } from "../../actions/cartActions";
+import PropTypes from "prop-types";
 
 import {
   Container,
@@ -19,11 +19,9 @@ import {
   Image,
   ProductInfo,
   SideWrapper,
-  SideImgContainer,
   ProductImg,
   AttributesContainer,
   ProductDescription,
-  SideImage,
 } from './ProductDetailElements'
 
 
@@ -37,8 +35,6 @@ class ProductDetail extends Component {
       product: {},
     };
   }
-
-  static propTypes = {};
 
   /* function to handle the key value of product's attributes */ 
   handleClick = (property, propertyValue) => {
@@ -60,7 +56,7 @@ class ProductDetail extends Component {
     copied.attributes = newAttributes;
 
     // Store the original attributes before selection
-    let setAttribtes = []
+    let setAttributes = []
  
     /* compare the setAttributes to the selected attributes 
     and use the differences as for preselection */ 
@@ -68,11 +64,11 @@ class ProductDetail extends Component {
       currentProduct.attributes.forEach((property) => {
         /* store and structure the setAttributes array as the 
         newAttributes array */
-        setAttribtes.push({name: property.name, value: property.items[0].value})
+        setAttributes.push({name: property.name, value: property.items[0].value})
       })
       /* check for attributes in the setAttributes but not in the newAttributes
       and put those attributes in the newAttributes  */ 
-      let result = setAttribtes.filter(el1 => 
+      let result = setAttributes.filter(el1 => 
         !newAttributes.some(el2 => el1.name === el2.name));
       
       result.map(el => {
@@ -116,16 +112,34 @@ class ProductDetail extends Component {
             const { prices, gallery, name, brand, 
               description, attributes } = data.product;
               
-            /* use the all the properties to define the product */
+            /* extract content from html tag */ 
+            const regex = /(<([^>]+)>)/ig
+            const body = description
+            const regular = body.replace(regex, "");
+
+            let parser = new DOMParser();
+            let htmlDoc = parser.parseFromString(description, "text/html");
+            let lis = htmlDoc.querySelectorAll("li");
+
+            /* check if description contains ul or li tags */
+            const checkForTags = (str) => {
+              return str.includes("<ul>") || str.includes("<li>");
+            }
+            
+            let result = "";
+            for (let item of lis) {
+              result += `• ${item.textContent}.\n`;
+            }
+            let lines = result.split("\n");
+
             const currentProduct = data.product; 
+            const sideImgCount = gallery.length
 
             return (
               <Wrapper>
-                <SideImgContainer>
-                  <SideWrapper>
+                <SideWrapper count={sideImgCount}>
                   <SideList gallery={gallery} tab={this.selectImage} />
-                  </SideWrapper>
-                </SideImgContainer>
+                </SideWrapper>
                 <ProductImg>
                   <Image src={gallery[index]} alt="" />
                 </ProductImg>
@@ -175,9 +189,14 @@ class ProductDetail extends Component {
                       cart
                     </Empty>)
                   }
-                  <ProductDescription>
-                    <div dangerouslySetInnerHTML={{ __html: description }} />
-                  </ProductDescription>
+                  {
+                    checkForTags(description) ? 
+                    (lines.map((line, index)=>{
+                      return <ProductDescription key={index}>
+                      {line}
+                    </ProductDescription>
+                    })) : regular
+                  }
                 </ProductInfo>
               </Wrapper>
             );
@@ -188,5 +207,14 @@ class ProductDetail extends Component {
   }
 }
 
+ProductDetail.propTypes = {
+  addToCart: PropTypes.func,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string
+    })
+  })
+}
+
 /* connect this component to the state for access to data */ 
-export default connect((state) => ({currentCurrency: state.currency}),{ addToCart })(ProductDetail)
+export default connect((state) => ({currentCurrency: state.currency}),{ addToCart })(ProductDetail);

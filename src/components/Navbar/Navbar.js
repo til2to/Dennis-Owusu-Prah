@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import logo from "../../images/logo.png";
 import basket_ from "../../images/basket_.png";
 import logoH from "../../images/logoH.png";
@@ -7,6 +6,7 @@ import Categories from "../Categories/Categories";
 import { connect } from "react-redux";
 import Overlay from "../Overlay/Overlay";
 import CurrencySelector from "../CurrencySelector/CurrencySelector";
+import PropTypes from "prop-types";
 
 import {
   Container,
@@ -18,7 +18,7 @@ import {
   NavLogo,
   CurrencyItems,
   ArrowContainer,
-  MyBag_Bag,
+  MyBagBag,
   Bag,
   TotalItems
 } from './NavbarElements'
@@ -31,7 +31,6 @@ class Navbar extends Component {
       toggleOverlay: false,
     };
   }
-  static propTypes = {};
 
   /* function to toggle the overlay or modal  */ 
   showOverlay = () => {
@@ -49,7 +48,7 @@ class Navbar extends Component {
 
   render() {
     // Get the quantity of items/products in cart state.
-    const { cartItems: { cart, quantity } } = this.props;
+    const { cartItems: { quantity } } = this.props;
     const { toggleOverlay } = this.state;
 
     return (
@@ -68,12 +67,12 @@ class Navbar extends Component {
                 <CurrencySelector />
               </ArrowContainer>
               {/* Add click event to toggle the modal/overlay */}
-              <MyBag_Bag onClick={()=>this.showOverlay()} >
+              <MyBagBag onClick={()=>this.showOverlay()} >
                 <Bag>
-                  <TotalItems>{quantity}</TotalItems>
+                  {quantity > 0 && (<TotalItems>{quantity}</TotalItems>)}
                   <img src={basket_} alt="" />
                 </Bag>
-              </MyBag_Bag>
+              </MyBagBag>
               {/* Add click event to close the overlay when outside area is clicked */}
               {toggleOverlay && 
               <Overlay  hideOverlay={this.hideOverlay} />}
@@ -83,6 +82,12 @@ class Navbar extends Component {
       </Container>
     );
   }
+}
+
+Navbar.propTypes = {
+  cartItems: PropTypes.shape({
+    quantity: PropTypes.number
+  })
 }
 
 /* connect this component to the state for access to data */ 

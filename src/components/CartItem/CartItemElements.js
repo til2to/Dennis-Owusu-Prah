@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const Container = styled.div`
   display: flex;
   border-top: 0.5px solid #e5e5e5;
@@ -105,6 +104,9 @@ export const CartInfo = styled.div`
   Margin-top: 10px;
   Margin-bottom: 10px;
   justify-content: space-between;
+`
+export const Wrapper = styled.div`
+  
 `
 export const AttributeName = styled.div`
   font-family: 'Raleway', sans-serif;

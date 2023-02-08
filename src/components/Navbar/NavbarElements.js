@@ -4,23 +4,25 @@ import styled from "styled-components";
 export const Container = styled.div`
   height: 60px;
   z-index: 1;
-`;
-export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
+`;
+export const Wrapper = styled.div`
   position: fixed;
   z-index: 1;
-  width: 95%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 33.33%  33.33%  33.33%;
+  grid-gap: 1rem;
 `;
 export const NavLeft = styled.div`
-  flex: 1;
   display: flex;
-  margin: 10px;
+  align-items: center;
+  // margin: 10px;
   align-items: center;
 `;
 export const NavCenter = styled.div`
-  flex: 1;
-  margin-left: 30px;
+  // margin-left: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,7 +50,7 @@ export const Select = styled.select`
   text-align: right;
 `;
 export const NavRight = styled.div`
-  flex: 1;
+  // flex: 1;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -69,7 +71,7 @@ export const DownArrow = styled.img`
   margin-top: 4px;
 `;
 export const Bag = styled.div`
-  margin-right: 30px;
+  // margin-right: 30px;
   margin-left: 20px;
   position: relative;
   cursor: pointer;
@@ -83,9 +85,9 @@ export const TotalItems = styled.div`
   color: white;
   font-size: 12px;
   bottom: 10px;
-  left: 10px;
+  left: 8px;
 `;
-export const MyBag_Bag = styled.div``;
+export const MyBagBag = styled.div``;
 
 export const Symbol_Label = styled.div`
 `;

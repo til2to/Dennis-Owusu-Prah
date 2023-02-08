@@ -9,11 +9,12 @@ const initialState = {
 
 export const paginationReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_PRODUCTS_LENGTH:
+    case SET_PRODUCTS_LENGTH: {
       let productsLength = action.payload
       window.localStorage.setItem('productsLength', JSON.stringify(productsLength))
 
       return productsLength;
+    }
 
     default:
       return state;

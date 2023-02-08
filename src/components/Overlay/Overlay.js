@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import MyBag from '../MyBag/MyBag'
+import React, { Component } from 'react';
+import MyBag from '../MyBag/MyBag';
+import PropTypes from "prop-types";
+
 
 import {
   Wrapper,
   BagStyle
-} from './OverlayElements'
+} from './OverlayElements';
 
 
 class Overlay extends Component {
-  static propTypes = {}
 
   constructor(props) {
     super(props);
@@ -37,4 +37,8 @@ class Overlay extends Component {
   }
 }
 
-export default Overlay
+Overlay.propTypes = {
+  hideOverlay: PropTypes.func,
+}
+
+export default Overlay;

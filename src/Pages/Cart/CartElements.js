@@ -45,4 +45,4 @@ export const EmptyCart = styled.div`
   font-size: 20px;
   font-weight: 100;
   margin-bottom: 10px;
-`
+`;

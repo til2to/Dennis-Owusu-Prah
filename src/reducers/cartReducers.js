@@ -12,10 +12,23 @@ const initialState = {
 
 export const cartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actions.ADD_TO_CART:
+    case actions.ADD_TO_CART: {
       const currentProduct = action.payload
       let amountIndex = parseInt(window.localStorage.getItem('SelectedCurrency'))
       
+      /* function to thoroughly check irrespective of order, if 
+      current product exist in the local storage using the attributes*/ 
+      const checkLocalStorage = (localStorage, currentProduct_attributes) => {
+        return (
+          localStorage.length === currentProduct_attributes.length &&
+          localStorage.every((element_1) =>
+          currentProduct_attributes.some((element_2) =>
+            Object.keys(element_1).every((key) => 
+            element_1[key] === element_2[key]))
+          )
+        );
+      }
+
       let exist = false 
       // check if item exist
       currentCart.forEach((localProduct) => {  
@@ -33,19 +46,6 @@ export const cartReducer = (state = initialState, action) => {
           window.localStorage.setItem('data', JSON.stringify(currentCart))
         }
       })
-
-      /* function to thoroughly check irrespective of order, if 
-      current product exist in the local storage using the attributes*/ 
-      function checkLocalStorage (localStorage, currentProduct_attributes) {
-        return (
-          localStorage.length === currentProduct_attributes.length &&
-          localStorage.every((element_1) =>
-          currentProduct_attributes.some((element_2) =>
-            Object.keys(element_1).every((key) => 
-            element_1[key] === element_2[key]))
-          )
-        );
-      };
       
       // item not in cart
       if (exist === false) {
@@ -72,14 +72,25 @@ export const cartReducer = (state = initialState, action) => {
         ...state,
         cart: [...currentCart]
       }
+    }
       
-      case actions.ADD_COUNT: 
+    case actions.ADD_COUNT: {
       let attributes = action.payload
       let priceIndex = JSON.parse(window.localStorage.getItem('SelectedCurrency'))
       let localTotal = JSON.parse(window.localStorage.getItem('total'))
 
       /* Use the current product's attributes to check against the local 
         storage or cart if there's a match, meaning product exist */ 
+      const isSame = (attributes, localProduct_attributes) => {
+        return (
+          attributes.length === localProduct_attributes.length &&
+          attributes.every((element_1) =>
+          localProduct_attributes.some((element_2) =>
+            Object.keys(element_1).every((key) => 
+            element_1[key] === element_2[key]))
+          )
+        );
+      }
       currentCart.forEach((localProduct) => {  
         if(isSame(attributes, localProduct.attributes)){
           /* if current product has a match, increase count key by 1 */ 
@@ -93,7 +104,29 @@ export const cartReducer = (state = initialState, action) => {
       })
       /* function to thoroughly check if product exist, based on the 
         attributes, irrespective of the order */ 
-      function isSame (attributes, localProduct_attributes) {
+
+      return {
+        ...state,
+        cart: [...state.cart,]
+      }
+
+      // return {
+      //   ...state,
+      //   cart: [...currentCart]
+      // }
+    }
+
+    case actions.SUB_COUNT: {
+      let currentAttributes = action.payload
+      let price_Index = parseInt(window.localStorage.getItem('SelectedCurrency'))
+      let localTotal_sub = JSON.parse(window.localStorage.getItem('total'))
+      
+      /* Use the current product's attributes to check against the local 
+        storage or cart if there's a match, meaning product exist */
+      
+        /* function to thoroughly check if product exist, based on the 
+        attributes, irrespective of the order */
+      const isEqual = (attributes, localProduct_attributes) => {
         return (
           attributes.length === localProduct_attributes.length &&
           attributes.every((element_1) =>
@@ -102,20 +135,8 @@ export const cartReducer = (state = initialState, action) => {
             element_1[key] === element_2[key]))
           )
         );
-      };
-
-      return {
-        ...state,
-        cart: [...state.cart]
       }
-
-    case actions.SUB_COUNT:
-      let currentAttributes = action.payload
-      let price_Index = parseInt(window.localStorage.getItem('SelectedCurrency'))
-      let localTotal_sub = JSON.parse(window.localStorage.getItem('total'))
       
-      /* Use the current product's attributes to check against the local 
-        storage or cart if there's a match, meaning product exist */
       currentCart.map((localObj, index) => {
         if(isEqual(currentAttributes, localObj.attributes)){
           if(localObj.count === 0){
@@ -138,25 +159,14 @@ export const cartReducer = (state = initialState, action) => {
         }
         return null
       })
-      /* function to thoroughly check if product exist, based on the 
-        attributes, irrespective of the order */
-      function isEqual (attributes, localProduct_attributes) {
-        return (
-          attributes.length === localProduct_attributes.length &&
-          attributes.every((element_1) =>
-          localProduct_attributes.some((element_2) =>
-            Object.keys(element_1).every((key) => 
-            element_1[key] === element_2[key]))
-          )
-        );
-      };
 
       return {
         ...state,
         cart: [...currentCart]
       }
+    }
 
     default:
       return state;
   }
-}
+};
