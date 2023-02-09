@@ -1,18 +1,13 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  height: 60px;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-`;
 export const Wrapper = styled.div`
   position: fixed;
+  width: 97%;
   z-index: 1;
-  width: 99%;
   display: grid;
-  grid-template-columns: 33.33%  33.33%  33.33%;
+  grid-template-columns: 32.33%  32.33%  32.33%;
   grid-gap: 1rem;
+  height: 60px;
 `;
 export const NavLeft = styled.div`
   display: flex;

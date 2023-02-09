@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-
 export const ProductSelector = styled.div`
   position: absolute;
   right: 15%;
@@ -12,7 +11,6 @@ export const ProductSelector = styled.div`
 `
 /* props to check items out of stock and disable pointers */ 
 export const Container = styled.div`
-  // pointer-events: ${props => props.instock === false ? 'none' : true};
   opacity: ${props => props.instock === false ? '1' : {}};
   flex: 1;
   max-width: 370px;
@@ -21,20 +19,6 @@ export const Container = styled.div`
   cursor: pointer;
   &:hover ${ProductSelector}{
     opacity: 1
-  }
-`
-export const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: #000;
-  &:focus, &:hover, &:visited, &:link, &:active {
-    text-decoration: none;
-  }
-`
-export const Child = styled.div`
-  text-decoration: none;
-  color: #000;
-  &:focus, &:hover, &:visited, &:link, &:active {
-    text-decoration: none;
   }
 `
 export const Wrapper = styled.div`
@@ -55,8 +39,22 @@ export const ProductImage = styled.div`
     opacity: 0.8;
   }
 `
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #000;
+  &:focus, &:hover, &:visited, &:link, &:active {
+    text-decoration: none;
+  }
+`
+export const Child = styled.div`
+  text-decoration: none;
+  color: #000;
+  &:focus, &:hover, &:visited, &:link, &:active {
+    text-decoration: none;
+  }
+`
 export const Gallery = styled.img`
-  object-fit: none;
+  object-fit: cover;
   width: 305px;
   height: 280px;
   position: relative;

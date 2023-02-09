@@ -61,7 +61,6 @@ class ProductItem extends Component {
                   <Stock>OUT OF STOCK</Stock>
                 }
               </ImageG>
-              {/* Dynamically add the id of each product to it's url  */}
                 { 
                   /*
                   Add click event to send the current product to the cart,

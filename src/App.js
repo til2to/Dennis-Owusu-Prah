@@ -67,8 +67,6 @@ class App extends Component {
           <Router>
             <Navbar />
             <CategoryName/>
-            
-            <div className="app">
               <Switch>
                 {/* path to the cart */} 
                 <Route exact path="/cart" component={Cart} /> 
@@ -83,7 +81,6 @@ class App extends Component {
                   <Redirect to="/" />
                 </Route>
               </Switch>
-            </div>
           </Router>
         </Provider>
       </div>

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Wrap = styled.div`
   position: relative;
+  width: 1px;
 `
 /* Add props to toggle the litle arrow at the currency symbol */
 export const Arrow = styled.img`

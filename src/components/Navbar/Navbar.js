@@ -9,7 +9,6 @@ import CurrencySelector from "../CurrencySelector/CurrencySelector";
 import PropTypes from "prop-types";
 
 import {
-  Container,
   Wrapper,
   NavLeft,
   NavCenter,
@@ -17,7 +16,6 @@ import {
   LogoHolder,
   NavLogo,
   CurrencyItems,
-  ArrowContainer,
   MyBag,
   Bag,
   TotalItems
@@ -52,7 +50,7 @@ class Navbar extends Component {
     const { toggleOverlay } = this.state;
 
     return (
-      <Container>
+      // <Container>
         <Wrapper>
           <NavLeft>
             <Categories />
@@ -77,7 +75,7 @@ class Navbar extends Component {
             </CurrencyItems>
           </NavRight>
         </Wrapper>
-      </Container>
+      // </Container>
     );
   }
 }
