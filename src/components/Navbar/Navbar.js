@@ -18,7 +18,7 @@ import {
   NavLogo,
   CurrencyItems,
   ArrowContainer,
-  MyBagBag,
+  MyBag,
   Bag,
   TotalItems
 } from './NavbarElements'
@@ -63,16 +63,14 @@ class Navbar extends Component {
           </NavCenter>
           <NavRight>
             <CurrencyItems>
-              <ArrowContainer>
-                <CurrencySelector />
-              </ArrowContainer>
+              <CurrencySelector />
               {/* Add click event to toggle the modal/overlay */}
-              <MyBagBag onClick={()=>this.showOverlay()} >
+              <MyBag onClick={()=>this.showOverlay()} >
                 <Bag>
                   {quantity > 0 && (<TotalItems>{quantity}</TotalItems>)}
                   <img src={basket_} alt="" />
                 </Bag>
-              </MyBagBag>
+              </MyBag>
               {/* Add click event to close the overlay when outside area is clicked */}
               {toggleOverlay && 
               <Overlay  hideOverlay={this.hideOverlay} />}

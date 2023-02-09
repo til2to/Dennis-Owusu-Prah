@@ -71,4 +71,4 @@ export const ButtonCheckout = styled.div`
   text-decoration: none; 
   position: relative;
   right: 20%; 
-`
+`;

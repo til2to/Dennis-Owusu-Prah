@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const Container = styled.div`
   height: 60px;
   z-index: 1;
@@ -10,7 +9,7 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
   position: fixed;
   z-index: 1;
-  width: 100%;
+  width: 99%;
   display: grid;
   grid-template-columns: 33.33%  33.33%  33.33%;
   grid-gap: 1rem;
@@ -18,11 +17,8 @@ export const Wrapper = styled.div`
 export const NavLeft = styled.div`
   display: flex;
   align-items: center;
-  // margin: 10px;
-  align-items: center;
 `;
 export const NavCenter = styled.div`
-  // margin-left: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,28 +27,16 @@ export const LogoHolder = styled.img`
   position: relative;
   height: 28.62px;
   width: 31.18px;
-  position: relative;
   background: linear-gradient(316.98deg, #52d67a 16.86%, #5aee87 84.04%);
 `;
 export const NavLogo = styled.img`
   position: absolute;
   width: 14.08px;
   height: 8.99px;
-  position: absolute;
-`;
-export const Select = styled.select`
-  padding-right: 3px;
-  border: none;
-  font-size: 17px;
-  font-weight: 500;
-  font-style: 17px;
-  color: #1d1f22;
-  text-align: right;
 `;
 export const NavRight = styled.div`
-  // flex: 1;
   display: flex;
-  justify-content: flex-end;
+  justify-content: end;
   align-items: center;
 `;
 export const Currency = styled.img`
@@ -65,13 +49,8 @@ export const CurrencyItems = styled.div`
   margin-right: 30px;
   margin-left: 10px;
 `;
-export const DownArrow = styled.img`
-  height: 3px;
-  width: 6px;
-  margin-top: 4px;
-`;
 export const Bag = styled.div`
-  // margin-right: 30px;
+  margin-right: 20px;
   margin-left: 20px;
   position: relative;
   cursor: pointer;
@@ -87,7 +66,7 @@ export const TotalItems = styled.div`
   bottom: 10px;
   left: 8px;
 `;
-export const MyBagBag = styled.div``;
+export const MyBag = styled.div``;
 
 export const Symbol_Label = styled.div`
 `;

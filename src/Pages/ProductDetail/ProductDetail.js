@@ -44,7 +44,7 @@ class ProductDetail extends Component {
   };
 
   /* function to submit product to cart with the selected attributes */ 
-  submitToCart = async (currentProduct) => {
+  submitToCart = async (currentProduct, inStock) => {
     const objectArray = Object.entries(this.state.product); //convert object to array
     let newAttributes = []; // new array for product's attributes
     objectArray.forEach(([key, value]) => {
@@ -78,14 +78,14 @@ class ProductDetail extends Component {
 
       /* now using the action, send current product with the selected 
       and pre-selected attributes to cart in the store. */
-      this.props.addToCart(copied)
+      inStock && this.props.addToCart(copied)
       newAttributes = []
     }
 
     /* if the length of the attributes arrays are equal, do nothing 
     but send the product */ 
     else {
-      this.props.addToCart(copied)
+      inStock && this.props.addToCart(copied)
       newAttributes = []
     }
   };
@@ -109,7 +109,7 @@ class ProductDetail extends Component {
             if (loading) return <span>Loading...</span>;
             if (error) console.log(error);
 
-            const { prices, gallery, name, brand, 
+            const { prices, gallery, name, brand, inStock,
               description, attributes } = data.product;
               
             /* extract content from html tag */ 
@@ -181,7 +181,7 @@ class ProductDetail extends Component {
                     cart with a count property */
                     attributes.length !== 0 ? 
                     (<Button 
-                    onClick={() => this.submitToCart({ ...currentProduct, count:1 })}>
+                    onClick={() => this.submitToCart({ ...currentProduct, count:1 }, inStock)}>
                       ADD TO CART
                     </Button>) : 
                     (<Empty>

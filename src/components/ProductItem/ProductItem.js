@@ -28,7 +28,7 @@ class ProductItem extends Component {
     addToCart: PropTypes.func,
   };
 
-  /* send product to cart with all of its first key values */ 
+  /* send product to cart with all of it's first key values */ 
   submitToCart = (currentProduct) => {
     let setAttributes = []
     let copied = JSON.parse(JSON.stringify(currentProduct));
@@ -67,18 +67,18 @@ class ProductItem extends Component {
                   Add click event to send the current product to the cart,
                   Also introduced count property to each product for the purpose of counting equal items
                   */ 
-                  attributes.length === 0 ?
+                inStock && (attributes.length === 0 ?
                   (<Child onClick={(e)=> e.preventDefault()}>
                     <ProductSelector onClick={() => this.props.addToCart({...currentProduct, count:1})}>
                       <SelectIcon src={basket} />
                     </ProductSelector>
                   </Child>)
-                :
-                (<Child onClick={(e)=> e.preventDefault()}>
-                  <ProductSelector onClick={() => this.submitToCart({...currentProduct, count:1})}>
-                    <SelectIcon src={basket} />
-                  </ProductSelector>
-                </Child>)
+                  :
+                  (<Child onClick={(e)=> e.preventDefault()}>
+                    <ProductSelector onClick={() => this.submitToCart({...currentProduct, count:1})}>
+                      <SelectIcon src={basket} />
+                    </ProductSelector>
+                  </Child>))
                 }
             </ProductImage>
             <ProductInfo>

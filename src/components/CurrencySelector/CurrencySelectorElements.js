@@ -1,10 +1,7 @@
 import styled from "styled-components";
 
-
 export const Wrap = styled.div`
   position: relative;
-  // display: inline-block;
-  left: 20px;
 `
 /* Add props to toggle the litle arrow at the currency symbol */
 export const Arrow = styled.img`
@@ -17,7 +14,7 @@ export const Arrow = styled.img`
 export const Dropdown = styled.div`
   padding: 10px 14px;
   width: 110px;
-  font-size: 22px;
+  font-size: 20px;
   text-align: center;
   &:hover {
     background-color: rgba(0, 0, 0, 0.14);
@@ -27,7 +24,7 @@ export const Dropdown = styled.div`
 export const Drop = styled.div`
   position: absolute;
   top: 100%;
-  right: -2.5em;
+  right: 0.001em;
   z-index: 3;
   border: 1px solid rgba(0, 0, 0, 0.04);
   background-color: white;
@@ -40,7 +37,7 @@ export const CurrencySymbol = styled.div`
   font-size: 22px;
   right: 50px;
   width: 100%;
-  padding-right: ${props => props.indexLength > 1 && '10px'};
+  padding-right: ${props => props.indexLength > 1 && '8px'};
 `
 export const ArrowContainer = styled.div`
 `
