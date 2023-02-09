@@ -20,4 +20,4 @@ export const Wrapper = styled.span`
 export const StyledLink = styled(Link)`
   text-decoration: none;
   display: flex;
-`
+`;

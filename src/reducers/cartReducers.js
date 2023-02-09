@@ -102,18 +102,11 @@ export const cartReducer = (state = initialState, action) => {
           window.localStorage.setItem('total', JSON.stringify(localTotal))
         }
       })
-      /* function to thoroughly check if product exist, based on the 
-        attributes, irrespective of the order */ 
 
       return {
         ...state,
         cart: [...state.cart,]
       }
-
-      // return {
-      //   ...state,
-      //   cart: [...currentCart]
-      // }
     }
 
     case actions.SUB_COUNT: {
@@ -123,9 +116,6 @@ export const cartReducer = (state = initialState, action) => {
       
       /* Use the current product's attributes to check against the local 
         storage or cart if there's a match, meaning product exist */
-      
-        /* function to thoroughly check if product exist, based on the 
-        attributes, irrespective of the order */
       const isEqual = (attributes, localProduct_attributes) => {
         return (
           attributes.length === localProduct_attributes.length &&

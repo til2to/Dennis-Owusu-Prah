@@ -113,4 +113,4 @@ class CurrencySelector extends Component {
 
 /* connect the changeCurrency action to this component to help 
 redux handle the currency changes */
-export default connect(null, { changeCurrency })(CurrencySelector)
+export default connect(null, { changeCurrency })(CurrencySelector);
