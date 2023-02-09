@@ -117,6 +117,8 @@ class ProductDetail extends Component {
             const body = description
             const regular = body.replace(regex, "");
 
+            const content = description.split("\n").filter(line => line.trim() !== "");
+
             let parser = new DOMParser();
             let htmlDoc = parser.parseFromString(description, "text/html");
             let lis = htmlDoc.querySelectorAll("li");
@@ -179,15 +181,10 @@ class ProductDetail extends Component {
                   {
                     /* Add click event to submit the current product to the 
                     cart with a count property */
-                    attributes.length !== 0 ? 
-                    (<Button 
+                    <Button 
                     onClick={() => this.submitToCart({ ...currentProduct, count:1 }, inStock)}>
                       ADD TO CART
-                    </Button>) : 
-                    (<Empty>
-                      Sorry! no attributes to select. Product already added to
-                      cart
-                    </Empty>)
+                    </Button>
                   }
                   {
                     checkForTags(description) ? 
@@ -195,7 +192,11 @@ class ProductDetail extends Component {
                       return <ProductDescription key={index}>
                       {line}
                     </ProductDescription>
-                    })) : regular
+                    })) : content.map((line, index) => {
+                      return <ProductDescription key={index}>
+                        {line.replace(/<[^>]+>/g, '')}
+                      </ProductDescription>
+                    })
                   }
                 </ProductInfo>
               </Wrapper>

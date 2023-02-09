@@ -33,10 +33,6 @@ class ProductList extends Component {
     const { currentPage, productsPerPage, } = this.state;
     const indexOfLastPost = currentPage * productsPerPage;
     const indexOfFirstPost = indexOfLastPost - productsPerPage;
-    /* Change page */
-    // const changePage = pageNumber => {
-    //   this.setState({currentPage: pageNumber})
-    // }
 
     return (
        <Container>

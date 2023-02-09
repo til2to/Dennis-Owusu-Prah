@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   justify-content: center;
   padding: 10px;
-  margin: 0 25px 0 25px;
+  margin: 10% 25px 0 25px;
 `;
 export const Wrapper = styled.div`
   display: flex;
@@ -77,12 +77,11 @@ export const Button = styled.div`
   align-items: center;
 `;
 export const ProductDescription = styled.p`
-  font-family: 'Roboto', sans-serif;
-  width: 256px;
+  max-width: 260px;
   display: flex;
   flex-wrap: wrap;
   font-size: 16px;
-  margin-top: 5px;
+  margin-top: 2px;
 `;
 export const SideWrapper = styled.div`
   margin-left: 20px;
