@@ -67,20 +67,20 @@ class App extends Component {
           <Router>
             <Navbar />
             <CategoryName/>
-              <Switch>
-                {/* path to the cart */} 
-                <Route exact path="/cart" component={Cart} /> 
-                {/* path based on product id */}
-                <Route path="/product/:id" component={Product} /> 
-                {/* path based on category name */} 
-                <Route path="/products/:name" component={Products} /> 
-                <Route exact path="/">
-                  <Redirect to="/products/all/" />
-                </Route>
-                <Route exact path="/products/all">
-                  <Redirect to="/" />
-                </Route>
-              </Switch>
+            <Switch>
+              {/* path to the cart */} 
+              <Route exact path="/cart" component={Cart} /> 
+              {/* path based on product id */}
+              <Route path="/product/:id" component={Product} /> 
+              {/* path based on category name */} 
+              <Route path="/products/:name" component={Products} /> 
+              <Route exact path="/">
+                <Redirect to="/products/all/" />
+              </Route>
+              <Route exact path="/products/all">
+                <Redirect to="/" />
+              </Route>
+            </Switch>
           </Router>
         </Provider>
       </div>

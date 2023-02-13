@@ -33,7 +33,6 @@ class MyBag extends Component {
       <Container quantity={quantity}>
         <Wrapper>
           <Title>
-            {quantity === 0 && <h3>Please add product(s)</h3>}
             {quantity > 1 ? (
               <span>My Bag {quantity} Items</span>
             ) : (

@@ -86,7 +86,7 @@ class ProductItem extends Component {
               
               <PriceItems>
                 <CurrencySymbol>
-                  {prices[price_index].currency.symbol} {prices[price_index].amount}
+                  {prices[price_index].currency.symbol} {prices[price_index].amount.toFixed(2)}
                 </CurrencySymbol>
               </PriceItems>
             </ProductInfo>

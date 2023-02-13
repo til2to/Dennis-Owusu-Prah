@@ -98,9 +98,7 @@ class CartItem extends Component {
                 <AttributesItems key={`item${index}`}>
                   {
                     item.name === 'Color' ?
-                    <ColorContainer key={`color${index}`} 
-                    style={{ backgroundColor: item.value, border: "1px solid #1d1f22" }}
-                    />
+                    <ColorContainer key={`color${index}`} backgroundColor={item.value}/>
                     :
                     <AttributesCont key={`container${index}`}>{item.value}</AttributesCont>
                   }
@@ -134,7 +132,7 @@ class CartItem extends Component {
               gallery.length !== 1 &&
               (
                 <>
-                {/* add click event to the "previous"/"next" buttons */}
+                  {/* add click event to the "previous"/"next" buttons */}
                   <PrevNext direction="right" 
                   onClick={() => this.handleNext(imageIndex, gallery)}
                   >

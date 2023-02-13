@@ -20,7 +20,7 @@ class Cart extends Component {
     let cartTotal = JSON.parse(window.localStorage.getItem('total')) || 0
     let price_index = JSON.parse(window.localStorage.getItem('SelectedCurrency')) || 0
     let local_data = JSON.parse(window.localStorage.getItem('data'))
-    let tax = 0.21 * cartTotal
+    let tax = (0.21 * cartTotal).toFixed(2)
 
     return (
       <Container>
@@ -33,7 +33,7 @@ class Cart extends Component {
           {
             quantity === 0
               ?
-              (<EmptyCart>Your cart is empty. Please add a product</EmptyCart>)
+              (<EmptyCart>Cart is empty. Please add a product</EmptyCart>)
               :
               local_data.map((item, index) => (
                 <CartItem key={index} item={item} addCount={this.props.addCount} />
@@ -42,7 +42,7 @@ class Cart extends Component {
           <TaxInfo>
             <Items>
               Tax: {cart[0] && cart[0]?.prices[price_index]?.currency.symbol } 
-              {tax.toFixed(2)}
+              {tax}
             </Items>
             <Items>Quantity: {quantity}</Items>
             {

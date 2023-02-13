@@ -75,7 +75,7 @@ class ProductDetail extends Component {
         return null
       })
 
-      /* now using the action, send current product with the selected 
+      /* using the action, send current product with the selected 
       and pre-selected attributes to cart in the store. */
       inStock && this.props.addToCart(copied)
       newAttributes = []
@@ -110,9 +110,6 @@ class ProductDetail extends Component {
 
             const { prices, gallery, name, brand, inStock,
               description, attributes } = data.product;
-              
-            /* extract content from html tag */ 
-            const content = description.split("\n").filter(line => line.trim() !== "");
 
             let parser = new DOMParser();
             let htmlDoc = parser.parseFromString(description, "text/html");
@@ -122,12 +119,14 @@ class ProductDetail extends Component {
             const checkForTags = (str) => {
               return str.includes("<ul>") || str.includes("<li>");
             }
-            
             let result = "";
             for (let item of lis) {
               result += `• ${item.textContent}.\n`;
             }
             let lines = result.split("\n");
+
+            /* extract content without li tag */ 
+            const content = description.split("\n").filter(line => line.trim() !== "");
 
             const currentProduct = data.product; 
             const sideImgCount = gallery.length
@@ -168,7 +167,7 @@ class ProductDetail extends Component {
                         {" "}
                         {prices[parseInt(
                             window.localStorage.getItem("SelectedCurrency")
-                          )].amount
+                          )].amount.toFixed(2)
                         }
                       </AttributePrice>
                     </PriceInfo>
@@ -183,7 +182,7 @@ class ProductDetail extends Component {
                   }
                   {
                     checkForTags(description) ? 
-                    (lines.map((line, index)=>{
+                    (lines.map((line, index) => {
                       return <ProductDescription key={index}>
                       {line}
                     </ProductDescription>

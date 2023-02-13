@@ -23,7 +23,7 @@ export const ProductImg = styled.div`
 export const Image = styled.img`
   display: flex;
   border: 0.5px;
-  widht: 400px;
+  max-width: 400px;
   height: 400px;
 `;
 export const ProductInfo = styled.div`

@@ -50,32 +50,30 @@ class Navbar extends Component {
     const { toggleOverlay } = this.state;
 
     return (
-      // <Container>
-        <Wrapper>
-          <NavLeft>
-            <Categories />
-          </NavLeft>
-          <NavCenter>
-            <LogoHolder src={logoH} alt="" />
-            <NavLogo src={logo} alt="" />
-          </NavCenter>
-          <NavRight>
-            <CurrencyItems>
-              <CurrencySelector />
-              {/* Add click event to toggle the modal/overlay */}
-              <MyBag onClick={()=>this.showOverlay()} >
-                <Bag>
-                  {quantity > 0 && (<TotalItems>{quantity}</TotalItems>)}
-                  <img src={basket_} alt="" />
-                </Bag>
-              </MyBag>
-              {/* Add click event to close the overlay when outside area is clicked */}
-              {toggleOverlay && 
-              <Overlay  hideOverlay={this.hideOverlay} />}
-            </CurrencyItems>
-          </NavRight>
-        </Wrapper>
-      // </Container>
+      <Wrapper>
+        <NavLeft>
+          <Categories />
+        </NavLeft>
+        <NavCenter>
+          <LogoHolder src={logoH} alt="" />
+          <NavLogo src={logo} alt="" />
+        </NavCenter>
+        <NavRight>
+          <CurrencyItems>
+            <CurrencySelector />
+            {/* Add click event to toggle the modal/overlay */}
+            <MyBag onClick={()=>this.showOverlay()} >
+              <Bag>
+                {quantity > 0 && (<TotalItems>{quantity}</TotalItems>)}
+                <img src={basket_} alt="" />
+              </Bag>
+            </MyBag>
+            {/* Add click event to close the overlay when outside area is clicked */}
+            {toggleOverlay && 
+            <Overlay  hideOverlay={this.hideOverlay} />}
+          </CurrencyItems>
+        </NavRight>
+      </Wrapper>
     );
   }
 }

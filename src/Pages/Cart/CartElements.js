@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
-
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
-  margin:0 10px 0 0;
+  margin: 7rem 10px 0 0;
 `
 export const Wrapper = styled.div`
   margin: 30px 0 0 20px;

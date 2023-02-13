@@ -91,6 +91,7 @@ export const ColorContainer = styled.div`
   margin-left: 0;
   cursor: pointer;
   margin-bottom: 10px;
+  background-color: ${props => props.backgroundColor}
 `
 export const Price = styled.span`
   font-weight: 350;
