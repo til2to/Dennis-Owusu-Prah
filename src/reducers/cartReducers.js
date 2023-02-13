@@ -2,7 +2,19 @@ import * as actions from '../Types';
 
 /* get products and total price from local storage */ 
 let currentCart = JSON.parse(window.localStorage.getItem('data')) || [];
-let currentTotal = JSON.parse(window.localStorage.getItem('total')) || 0
+let currentTotal = JSON.parse(window.localStorage.getItem('total')) || 0;
+
+/* function to thoroughly check if attributes of products are equal irrespective of order*/
+const isEqual = (productAttribute_1, currentProduct_attributes) => {
+  return (
+    productAttribute_1.length === currentProduct_attributes.length &&
+    productAttribute_1.every((element_1) =>
+    currentProduct_attributes.some((element_2) =>
+      Object.keys(element_1).every((key) => 
+      element_1[key] === element_2[key]))
+    )
+  );
+}
 
 const initialState = {
   cart: currentCart, // set the cart to the local storage data array
@@ -14,25 +26,12 @@ export const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.ADD_TO_CART: {
       const currentProduct = action.payload
-      let amountIndex = parseInt(window.localStorage.getItem('SelectedCurrency'))
-      
-      /* function to thoroughly check irrespective of order, if 
-      current product exist in the local storage using the attributes*/ 
-      const checkLocalStorage = (localStorage, currentProduct_attributes) => {
-        return (
-          localStorage.length === currentProduct_attributes.length &&
-          localStorage.every((element_1) =>
-          currentProduct_attributes.some((element_2) =>
-            Object.keys(element_1).every((key) => 
-            element_1[key] === element_2[key]))
-          )
-        );
-      }
+      let amountIndex = parseInt(window.localStorage.getItem('SelectedCurrency')) 
 
       let exist = false 
       // check if item exist
       currentCart.forEach((localProduct) => {  
-        if(checkLocalStorage(currentProduct.attributes, localProduct.attributes))
+        if(isEqual(currentProduct.attributes, localProduct.attributes))
         {
           exist = true;
           let local_total = JSON.parse(window.localStorage.getItem('total'))
@@ -56,7 +55,7 @@ export const cartReducer = (state = initialState, action) => {
         /* if product does not exist add product to cart or local 
         storage but always the current product at index 0 */ 
         currentCart.unshift(currentProduct)
-        window.localStorage.setItem('data', JSON.stringify(currentCart))
+        window.localStorage.setItem('data', JSON.stringify([...currentCart]))
         let local_total = JSON.parse(window.localStorage.getItem('total'))
         /*set the amount */ 
         local_total += currentProduct.prices[amountIndex].amount 
@@ -79,20 +78,8 @@ export const cartReducer = (state = initialState, action) => {
       let priceIndex = JSON.parse(window.localStorage.getItem('SelectedCurrency'))
       let localTotal = JSON.parse(window.localStorage.getItem('total'))
 
-      /* Use the current product's attributes to check against the local 
-        storage or cart if there's a match, meaning product exist */ 
-      const isSame = (attributes, localProduct_attributes) => {
-        return (
-          attributes.length === localProduct_attributes.length &&
-          attributes.every((element_1) =>
-          localProduct_attributes.some((element_2) =>
-            Object.keys(element_1).every((key) => 
-            element_1[key] === element_2[key]))
-          )
-        );
-      }
       currentCart.forEach((localProduct) => {  
-        if(isSame(attributes, localProduct.attributes)){
+        if(isEqual(attributes, localProduct.attributes)){
           /* if current product has a match, increase count key by 1 */ 
           localProduct.count = localProduct.count + 1
           /* update product by updating the local storage */ 
@@ -113,19 +100,6 @@ export const cartReducer = (state = initialState, action) => {
       let currentAttributes = action.payload
       let price_Index = parseInt(window.localStorage.getItem('SelectedCurrency'))
       let localTotal_sub = JSON.parse(window.localStorage.getItem('total'))
-      
-      /* Use the current product's attributes to check against the local 
-        storage or cart if there's a match, meaning product exist */
-      const isEqual = (attributes, localProduct_attributes) => {
-        return (
-          attributes.length === localProduct_attributes.length &&
-          attributes.every((element_1) =>
-          localProduct_attributes.some((element_2) =>
-            Object.keys(element_1).every((key) => 
-            element_1[key] === element_2[key]))
-          )
-        );
-      }
       
       currentCart.map((localObj, index) => {
         if(isEqual(currentAttributes, localObj.attributes)){

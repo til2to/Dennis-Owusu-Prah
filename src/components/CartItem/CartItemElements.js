@@ -106,7 +106,6 @@ export const CartInfo = styled.div`
   justify-content: space-between;
 `
 export const Wrapper = styled.div`
-  
 `
 export const AttributeName = styled.div`
   font-family: 'Raleway', sans-serif;

@@ -13,7 +13,6 @@ import {
   Name,
   Brand,
   Button,
-  Empty,
   PriceInfo,
   AttributePrice,
   Image,
@@ -113,10 +112,6 @@ class ProductDetail extends Component {
               description, attributes } = data.product;
               
             /* extract content from html tag */ 
-            const regex = /(<([^>]+)>)/ig
-            const body = description
-            const regular = body.replace(regex, "");
-
             const content = description.split("\n").filter(line => line.trim() !== "");
 
             let parser = new DOMParser();
@@ -151,7 +146,7 @@ class ProductDetail extends Component {
                   <AttributesContainer>
                     {/* loop through product's array and pass as 
                     props to attributes component */}
-                    {data.product.attributes.map((item) => (
+                    {attributes.map((item) => (
                       <Attributes
                         key={item.id}
                         item={item}

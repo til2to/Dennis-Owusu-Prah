@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types'
 import arrow from "../../images/arrow.svg";
 import { connect } from "react-redux";
 import { changeCurrency } from "../../actions/currencyActions";
@@ -21,7 +22,7 @@ class CurrencySelector extends Component {
       defaultCurrency: JSON.parse(window.localStorage.getItem('SelectedCurrency')) || 0,
       open: false,
     }
-  };
+  }
 
   // clicking on all other areas on the app to close the currency dropdown
   container = React.createRef();
@@ -59,7 +60,7 @@ class CurrencySelector extends Component {
   setCurrency = (type) => {
     this.props.changeCurrency(type)
 
-    this.setState((state) => {
+    this.setState(() => {
       return {
         defaultCurrency: type,
         open: false,
@@ -109,6 +110,10 @@ class CurrencySelector extends Component {
       </Wrap>
     )
   }
+}
+
+CurrencySelector.propTypes = {
+  changeCurrency: PropTypes.func
 }
 
 /* connect the changeCurrency action to this component to help 
